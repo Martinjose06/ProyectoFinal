@@ -28,7 +28,7 @@ public class AgregarAlumno extends javax.swing.JDialog {
     String ruta;
     ObjectOutputStream salida;
     ArrayList<Alumno> alumno;
-    
+
     public AgregarAlumno(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -42,7 +42,7 @@ public class AgregarAlumno extends javax.swing.JDialog {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-        
+
     }
 
     /**
@@ -77,8 +77,10 @@ public class AgregarAlumno extends javax.swing.JDialog {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTabla = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Agregar Alumno");
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -187,6 +189,11 @@ public class AgregarAlumno extends javax.swing.JDialog {
 
         cmdLimpiar.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         cmdLimpiar.setText("Limpiar");
+        cmdLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdLimpiarActionPerformed(evt);
+            }
+        });
         jPanel4.add(cmdLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 150, 90, -1));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 30, 110, 200));
@@ -224,6 +231,9 @@ public class AgregarAlumno extends javax.swing.JDialog {
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 720, 230));
 
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Grupo Folclorico.jpeg"))); // NOI18N
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -40, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -234,18 +244,16 @@ public class AgregarAlumno extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
-        
+
         String identificacion = null, nombre = null, primer_apellido = null, segundo_apellido = null, edad = null, clase = null;
-        
+
         try {
             identificacion = txtIdentificacion.getText();
             nombre = txtNombre.getText();
@@ -256,13 +264,13 @@ public class AgregarAlumno extends javax.swing.JDialog {
         } catch (Exception e) {
             Helper.mensaje(this, "Por favor digite datos correctos", "Error", 2);
         }
-        
+
         if (txtIdentificacion.getText().isEmpty() || txtClase.getText().isEmpty() || txtEdad.getText().isEmpty() || txtNombre.getText().isEmpty() || txtPrimer_Apellido.getText().isEmpty() || txtSegundo_Apellido.getText().isEmpty()) {
             Helper.mensaje(this, "No puede dejar campos vacios", "Error", 2);
         } else {
-            
+
             Alumno a = new Alumno(identificacion, nombre, primer_apellido, segundo_apellido, edad, clase);
-            
+
             try {
                 a.guardar(salida);
             } catch (IOException ex) {
@@ -275,18 +283,18 @@ public class AgregarAlumno extends javax.swing.JDialog {
             txtNombre.setText("");
             txtPrimer_Apellido.setText("");
             txtSegundo_Apellido.setText("");
-            txtIdentificacion.requestFocusInWindow();
+            txtNombre.requestFocusInWindow();
         }
     }//GEN-LAST:event_cmdAgregarActionPerformed
 
     private void cmdEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEliminarActionPerformed
         // TODO add your handling code here:
         int i, op;
-        
+
         op = JOptionPane.showConfirmDialog(this, "¿Seguro que desea eliminar?", "Eliminar", JOptionPane.YES_NO_OPTION);
-        
+
         if (op == JOptionPane.YES_OPTION) {
-            
+
             try {
                 i = tblTabla.getSelectedRow();
                 alumno.remove(i);
@@ -311,10 +319,10 @@ public class AgregarAlumno extends javax.swing.JDialog {
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        
+
         if (!Character.isAlphabetic(c)) {
             getToolkit().beep();
-            
+
             evt.consume();
         }
     }//GEN-LAST:event_txtNombreKeyTyped
@@ -322,10 +330,10 @@ public class AgregarAlumno extends javax.swing.JDialog {
     private void txtPrimer_ApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrimer_ApellidoKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        
+
         if (!Character.isAlphabetic(c)) {
             getToolkit().beep();
-            
+
             evt.consume();
         }
     }//GEN-LAST:event_txtPrimer_ApellidoKeyTyped
@@ -333,10 +341,10 @@ public class AgregarAlumno extends javax.swing.JDialog {
     private void txtSegundo_ApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegundo_ApellidoKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        
+
         if (!Character.isAlphabetic(c)) {
             getToolkit().beep();
-            
+
             evt.consume();
         }
     }//GEN-LAST:event_txtSegundo_ApellidoKeyTyped
@@ -344,10 +352,10 @@ public class AgregarAlumno extends javax.swing.JDialog {
     private void txtClaseKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClaseKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        
+
         if (!Character.isAlphabetic(c)) {
             getToolkit().beep();
-            
+
             evt.consume();
         }
     }//GEN-LAST:event_txtClaseKeyTyped
@@ -355,10 +363,10 @@ public class AgregarAlumno extends javax.swing.JDialog {
     private void txtIdentificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdentificacionKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        
+
         if (!Character.isDigit(c)) {
             getToolkit().beep();
-            
+
             evt.consume();
         }
     }//GEN-LAST:event_txtIdentificacionKeyTyped
@@ -366,10 +374,10 @@ public class AgregarAlumno extends javax.swing.JDialog {
     private void txtEdadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEdadKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        
+
         if (!Character.isDigit(c)) {
             getToolkit().beep();
-            
+
             evt.consume();
         }
     }//GEN-LAST:event_txtEdadKeyTyped
@@ -381,7 +389,7 @@ public class AgregarAlumno extends javax.swing.JDialog {
         alumno = Helper.traerDatos(ruta);
         i = tblTabla.getSelectedRow();
         p = alumno.get(i);
-        
+
         txtClase.setText(p.getClase());
         txtNombre.setText(p.getNombre());
         txtIdentificacion.setText(p.getIdentificacion());
@@ -389,6 +397,17 @@ public class AgregarAlumno extends javax.swing.JDialog {
         txtPrimer_Apellido.setText(p.getPrimer_apellido());
         txtSegundo_Apellido.setText(p.getSegundo_apellido());
     }//GEN-LAST:event_tblTablaMouseClicked
+
+    private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
+        txtClase.setText("");
+        txtNombre.setText("");
+        txtIdentificacion.setText("");
+        txtEdad.setText("");
+        txtPrimer_Apellido.setText("");
+        txtSegundo_Apellido.setText("");
+        txtNombre.requestFocusInWindow();
+
+    }//GEN-LAST:event_cmdLimpiarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -443,6 +462,7 @@ public class AgregarAlumno extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

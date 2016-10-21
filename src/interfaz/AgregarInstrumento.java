@@ -76,8 +76,10 @@ public class AgregarInstrumento extends javax.swing.JDialog {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTabla = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Agregar Instrumento");
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -223,15 +225,18 @@ public class AgregarInstrumento extends javax.swing.JDialog {
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 720, 230));
 
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Grupo Folclorico.jpeg"))); // NOI18N
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -287,8 +292,8 @@ public class AgregarInstrumento extends javax.swing.JDialog {
                 i = tblTabla.getSelectedRow();
                 instrumento.remove(i);
                 salida = new ObjectOutputStream(new FileOutputStream(ruta));
-                Helper.volcado(salida, instrumento);
-                Helper.llenadoTabla(tblTabla, ruta);
+                Helper.volcadoI(salida, instrumento);
+                Helper.llenadoTablaI(tblTabla, ruta);
                 txtColor.setText("");
                 txtGenero.setText("");
                 txtNombre.setText("");
@@ -386,7 +391,7 @@ public class AgregarInstrumento extends javax.swing.JDialog {
         // TODO add your handling code here:
         Instrumento p;
         int i;
-        instrumento = Helper.traerDatos(ruta);
+        instrumento = Helper.traerDatosI(ruta);
         i = tblTabla.getSelectedRow();
         p = instrumento.get(i);
 
@@ -450,6 +455,7 @@ public class AgregarInstrumento extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
