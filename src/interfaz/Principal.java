@@ -47,6 +47,7 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Caribbean To World");
+        setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -63,12 +64,16 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 370));
 
         jMenu1.setText("Archivo");
+        jMenu1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
 
         MnReporte.setText("Reporte");
+        MnReporte.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
 
+        MnAlumno.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         MnAlumno.setText("Alumno");
         MnReporte.add(MnAlumno);
 
+        MnInstrumento.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         MnInstrumento.setText("Instrumento");
         MnReporte.add(MnInstrumento);
 
@@ -77,9 +82,12 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Opciones");
+        jMenu2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
 
         MnAgregar.setText("Agregar");
+        MnAgregar.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
 
+        MnAgregarAlumno.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         MnAgregarAlumno.setText("Alumno");
         MnAgregarAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,6 +96,7 @@ public class Principal extends javax.swing.JFrame {
         });
         MnAgregar.add(MnAgregarAlumno);
 
+        MnAgregarInstrumento.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         MnAgregarInstrumento.setText("Instrumento");
         MnAgregarInstrumento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,6 +108,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu2.add(MnAgregar);
         jMenu2.add(jSeparator1);
 
+        MnSalir.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         MnSalir.setText("Salir");
         MnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -7,6 +7,7 @@ package interfaz;
 
 import clases.Helper;
 import clases.Instrumento;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutput;
@@ -14,6 +15,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -79,44 +81,87 @@ public class AgregarInstrumento extends javax.swing.JDialog {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del Instrumento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 12))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del Instrumento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 12))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel1.setText("No. Registro");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
-        jPanel2.add(txtRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 90, -1));
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        txtRegistro.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        txtRegistro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRegistroKeyTyped(evt);
+            }
+        });
+        jPanel2.add(txtRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 80, -1));
+
+        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel2.setText("Nombre");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
-        jPanel2.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 110, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        txtNombre.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
+        jPanel2.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 80, -1));
+
+        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel3.setText("Genero");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
-        jPanel2.add(txtGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 120, -1));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        txtGenero.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        txtGenero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtGeneroKeyTyped(evt);
+            }
+        });
+        jPanel2.add(txtGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 80, -1));
+
+        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel4.setText("Peso");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, -1, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, -1, -1));
+
+        txtPeso.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        txtPeso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPesoKeyTyped(evt);
+            }
+        });
         jPanel2.add(txtPeso, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 70, -1));
 
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel5.setText("Precio");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, -1, -1));
-        jPanel2.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 80, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        txtPrecio.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioKeyTyped(evt);
+            }
+        });
+        jPanel2.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 70, -1));
+
+        jLabel6.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel6.setText("Color");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, -1, -1));
-        jPanel2.add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 80, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 380, 210));
+        txtColor.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        txtColor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtColorKeyTyped(evt);
+            }
+        });
+        jPanel2.add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 70, -1));
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 12))); // NOI18N
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 380, 170));
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 12))); // NOI18N
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        cmdAgregar.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         cmdAgregar.setText("Agregar");
         cmdAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,18 +170,31 @@ public class AgregarInstrumento extends javax.swing.JDialog {
         });
         jPanel4.add(cmdAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 90, -1));
 
+        cmdEliminar.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         cmdEliminar.setText("Eliminar");
+        cmdEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdEliminarActionPerformed(evt);
+            }
+        });
         jPanel4.add(cmdEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 90, -1));
         jPanel4.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 90, -1));
 
+        cmdLimpiar.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         cmdLimpiar.setText("Limpiar");
+        cmdLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdLimpiarActionPerformed(evt);
+            }
+        });
         jPanel4.add(cmdLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 150, 90, -1));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 30, 110, 200));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 30, 110, 200));
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Informacion"));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informacion", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 12))); // NOI18N
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tblTabla.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         tblTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -154,6 +212,11 @@ public class AgregarInstrumento extends javax.swing.JDialog {
             }
         });
         tblTabla.setToolTipText("");
+        tblTabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTablaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblTabla);
 
         jPanel5.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 700, 200));
@@ -176,34 +239,164 @@ public class AgregarInstrumento extends javax.swing.JDialog {
 
     private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
 
-        try{
-        String nombre, genero, peso, color, registro, precio;
-        
-        nombre = txtNombre.getText();
-        genero = txtGenero.getText();
-        peso = txtPeso.getText();
-        color = txtColor.getText();
-        registro = txtRegistro.getText();
-        precio = txtPrecio.getText();
-        
-        Instrumento i = new Instrumento(nombre, genero, peso, color, precio, registro);
-        
-        i.guardar(salida);
-        
-        
-        Helper.llenadoTablaI(tblTabla, ruta);
+        String nombre = null, genero = null, peso = null, color = null, registro = null, precio = null;
+
+        try {
+            nombre = txtNombre.getText();
+            genero = txtGenero.getText();
+            peso = txtPeso.getText();
+            color = txtColor.getText();
+            registro = txtRegistro.getText();
+            precio = txtPrecio.getText();
+        } catch (Exception e) {
+            Helper.mensaje(this, "Por favor digite datos correctos", "Error", 2);
+        }
+
+        if (txtColor.getText().isEmpty() || txtGenero.getText().isEmpty() || txtNombre.getText().isEmpty() || txtPeso.getText().isEmpty() || txtPrecio.getText().isEmpty() || txtRegistro.getText().isEmpty()) {
+            Helper.mensaje(this, "No puede dejar campos vacios", "Error", 2);
+        } else {
+
+            Instrumento i = new Instrumento(nombre, genero, peso, color, precio, registro);
+
+            try {
+                i.guardar(salida);
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+
+            Helper.llenadoTablaI(tblTabla, ruta);
+            txtColor.setText("");
+            txtGenero.setText("");
+            txtPeso.setText("");
+            txtNombre.setText("");
+            txtPrecio.setText("");
+            txtRegistro.setText("");
+            txtRegistro.requestFocusInWindow();
+        }
+    }//GEN-LAST:event_cmdAgregarActionPerformed
+
+    private void cmdEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEliminarActionPerformed
+        // TODO add your handling code here:
+        int i, op;
+
+        op = JOptionPane.showConfirmDialog(this, "¿Seguro que desea eliminar?", "Eliminar", JOptionPane.YES_NO_OPTION);
+
+        if (op == JOptionPane.YES_OPTION) {
+
+            try {
+                i = tblTabla.getSelectedRow();
+                instrumento.remove(i);
+                salida = new ObjectOutputStream(new FileOutputStream(ruta));
+                Helper.volcado(salida, instrumento);
+                Helper.llenadoTabla(tblTabla, ruta);
+                txtColor.setText("");
+                txtGenero.setText("");
+                txtNombre.setText("");
+                txtPeso.setText("");
+                txtPrecio.setText("");
+                txtRegistro.setText("");
+                txtRegistro.requestFocusInWindow();
+            } catch (FileNotFoundException ex) {
+                System.out.println(ex.getMessage());
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }//GEN-LAST:event_cmdEliminarActionPerformed
+
+    private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
+        // TODO add your handling code here:
+        txtNombre.setText("");
         txtColor.setText("");
         txtGenero.setText("");
         txtPeso.setText("");
-        txtNombre.setText("");
         txtPrecio.setText("");
         txtRegistro.setText("");
-        txtRegistro.requestFocusInWindow();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
 
-    }//GEN-LAST:event_cmdAgregarActionPerformed
+        txtRegistro.requestFocusInWindow();
+    }//GEN-LAST:event_cmdLimpiarActionPerformed
+
+    private void txtRegistroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRegistroKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRegistroKeyTyped
+
+    private void txtPesoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesoKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPesoKeyTyped
+
+    private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPrecioKeyTyped
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+
+        if (!Character.isAlphabetic(c)) {
+            getToolkit().beep();
+
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtGeneroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGeneroKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+
+        if (!Character.isAlphabetic(c)) {
+            getToolkit().beep();
+
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtGeneroKeyTyped
+
+    private void txtColorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtColorKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+
+        if (!Character.isAlphabetic(c)) {
+            getToolkit().beep();
+
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtColorKeyTyped
+
+    private void tblTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTablaMouseClicked
+        // TODO add your handling code here:
+        Instrumento p;
+        int i;
+        instrumento = Helper.traerDatos(ruta);
+        i = tblTabla.getSelectedRow();
+        p = instrumento.get(i);
+
+        txtColor.setText(p.getColor());
+        txtNombre.setText(p.getNombre());
+        txtGenero.setText(p.getGenero());
+        txtPeso.setText(p.getPeso());
+        txtPrecio.setText(p.getPrecio());
+        txtRegistro.setText(p.getNumero_registro());
+    }//GEN-LAST:event_tblTablaMouseClicked
 
     /**
      * @param args the command line arguments
