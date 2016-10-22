@@ -6,6 +6,7 @@
 package interfaz;
 
 import clases.Helper;
+import java.awt.event.KeyEvent;
 import javax.swing.UIManager;
 
 /**
@@ -38,6 +39,7 @@ public class Login extends javax.swing.JFrame {
         txtUsuario = new javax.swing.JTextField();
         txtContraseña = new javax.swing.JPasswordField();
         cmdEntrar = new javax.swing.JButton();
+        cmdAtras = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
 
         jLabel4.setText("jLabel4");
@@ -59,17 +61,40 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel3.setText("Contraseña:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, -1, -1));
+
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 150, -1));
+
+        txtContraseña.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtContraseñaKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 150, -1));
 
-        cmdEntrar.setText("Entrar");
+        cmdEntrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/login.png"))); // NOI18N
+        cmdEntrar.setContentAreaFilled(false);
         cmdEntrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmdEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdEntrarActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 90, 30));
+        jPanel1.add(cmdEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 180, 90, 30));
+
+        cmdAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Back.png"))); // NOI18N
+        cmdAtras.setBorderPainted(false);
+        cmdAtras.setContentAreaFilled(false);
+        cmdAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdAtrasActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmdAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 100, 30));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/tambores.jpg"))); // NOI18N
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 250));
@@ -104,6 +129,49 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmdEntrarActionPerformed
 
+    private void txtContraseñaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraseñaKeyPressed
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String contraseña, usuario;
+
+            usuario = txtUsuario.getText();
+            contraseña = txtContraseña.getText();
+
+            if (usuario.equalsIgnoreCase("admin") && contraseña.equalsIgnoreCase("123")) {
+                Principal P = new Principal();
+                P.setVisible(true);
+                dispose();
+            } else {
+                Helper.mensaje(this, "Usuario / Contraseña incorrecto", "Error", 2);
+            }
+        }
+    }//GEN-LAST:event_txtContraseñaKeyPressed
+
+    private void txtUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyPressed
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String contraseña, usuario;
+
+            usuario = txtUsuario.getText();
+            contraseña = txtContraseña.getText();
+
+            if (usuario.equalsIgnoreCase("admin") && contraseña.equalsIgnoreCase("123")) {
+                Principal P = new Principal();
+                P.setVisible(true);
+                dispose();
+            } else {
+                Helper.mensaje(this, "Usuario / Contraseña incorrecto", "Error", 2);
+            }
+        }
+    }//GEN-LAST:event_txtUsuarioKeyPressed
+
+    private void cmdAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAtrasActionPerformed
+
+        PanelSeleccion ps = new PanelSeleccion();
+        ps.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_cmdAtrasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -115,10 +183,11 @@ public class Login extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-              /*  if ("Nimbus".equals(info.getName())) {
+                /*  if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }*/UIManager.setLookAndFeel("com.jtattoo.plaf.aero.AeroLookAndFeel");
+                }*/
+                UIManager.setLookAndFeel("com.jtattoo.plaf.aero.AeroLookAndFeel");
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -140,6 +209,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmdAtras;
     private javax.swing.JButton cmdEntrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

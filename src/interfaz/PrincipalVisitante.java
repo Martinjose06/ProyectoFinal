@@ -11,12 +11,12 @@ import javax.swing.UIManager;
  *
  * @author LUCYLEONOR
  */
-public class Principal extends javax.swing.JFrame {
+public class PrincipalVisitante extends javax.swing.JFrame {
 
     /**
      * Creates new form Principal
      */
-    public Principal() {
+    public PrincipalVisitante() {
         initComponents();
     }
 
@@ -29,25 +29,20 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuItem1 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         MnReporte = new javax.swing.JMenu();
         MnAlumno = new javax.swing.JMenuItem();
         MnInstrumento = new javax.swing.JMenuItem();
-        mnCerrarSesionAdmin = new javax.swing.JMenu();
-        MnAgregar = new javax.swing.JMenu();
-        MnAgregarAlumno = new javax.swing.JMenuItem();
-        MnAgregarInstrumento = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        mnCerrarSesion = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
         MnSalir = new javax.swing.JMenuItem();
-
-        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Caribbean To World");
@@ -62,8 +57,8 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Instrumentos.jpeg"))); // NOI18N
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Instrumentos.jpeg"))); // NOI18N
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 370));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 370));
 
@@ -85,40 +80,18 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        mnCerrarSesionAdmin.setText("Opciones");
-        mnCerrarSesionAdmin.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jMenu2.setText("Opciones");
+        jMenu2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jMenu2.add(jSeparator1);
 
-        MnAgregar.setText("Agregar");
-        MnAgregar.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-
-        MnAgregarAlumno.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        MnAgregarAlumno.setText("Alumno");
-        MnAgregarAlumno.addActionListener(new java.awt.event.ActionListener() {
+        mnCerrarSesion.setText("Cerrar sesion Visitante");
+        mnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnAgregarAlumnoActionPerformed(evt);
+                mnCerrarSesionActionPerformed(evt);
             }
         });
-        MnAgregar.add(MnAgregarAlumno);
-
-        MnAgregarInstrumento.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        MnAgregarInstrumento.setText("Instrumento");
-        MnAgregarInstrumento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnAgregarInstrumentoActionPerformed(evt);
-            }
-        });
-        MnAgregar.add(MnAgregarInstrumento);
-
-        mnCerrarSesionAdmin.add(MnAgregar);
-        mnCerrarSesionAdmin.add(jSeparator1);
-
-        jMenuItem2.setText("Cerrar sesion Administrador");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        mnCerrarSesionAdmin.add(jMenuItem2);
+        jMenu2.add(mnCerrarSesion);
+        jMenu2.add(jSeparator2);
 
         MnSalir.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         MnSalir.setText("Salir");
@@ -127,9 +100,9 @@ public class Principal extends javax.swing.JFrame {
                 MnSalirActionPerformed(evt);
             }
         });
-        mnCerrarSesionAdmin.add(MnSalir);
+        jMenu2.add(MnSalir);
 
-        jMenuBar1.add(mnCerrarSesionAdmin);
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -137,29 +110,16 @@ public class Principal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void MnAgregarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnAgregarAlumnoActionPerformed
-
-        AgregarAlumno a = new AgregarAlumno(this, true);
-        a.setVisible(true);
-
-    }//GEN-LAST:event_MnAgregarAlumnoActionPerformed
-
-    private void MnAgregarInstrumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnAgregarInstrumentoActionPerformed
-
-        AgregarInstrumento i = new AgregarInstrumento(this, true);
-        i.setVisible(true);
-    }//GEN-LAST:event_MnAgregarInstrumentoActionPerformed
-
     private void MnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_MnSalirActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void mnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCerrarSesionActionPerformed
 
         PanelSeleccion ps = new PanelSeleccion();
         ps.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_mnCerrarSesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,41 +138,39 @@ public class Principal extends javax.swing.JFrame {
                 }*/ UIManager.setLookAndFeel("com.jtattoo.plaf.aero.AeroLookAndFeel");
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrincipalVisitante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrincipalVisitante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrincipalVisitante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrincipalVisitante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Principal().setVisible(true);
+                new PrincipalVisitante().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu MnAgregar;
-    private javax.swing.JMenuItem MnAgregarAlumno;
-    private javax.swing.JMenuItem MnAgregarInstrumento;
     private javax.swing.JMenuItem MnAlumno;
     private javax.swing.JMenuItem MnInstrumento;
     private javax.swing.JMenu MnReporte;
     private javax.swing.JMenuItem MnSalir;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JMenu mnCerrarSesionAdmin;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JMenuItem mnCerrarSesion;
     // End of variables declaration//GEN-END:variables
 }
