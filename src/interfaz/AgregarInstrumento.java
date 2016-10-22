@@ -33,6 +33,7 @@ public class AgregarInstrumento extends javax.swing.JDialog {
     public AgregarInstrumento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        txtRegistro.requestFocusInWindow();
         ruta = "src/datos/instrumentos.txt";
         instrumento = Helper.traerDatosI(ruta);
         try {

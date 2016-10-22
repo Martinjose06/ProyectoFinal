@@ -32,6 +32,7 @@ public class AgregarAlumno extends javax.swing.JDialog {
     public AgregarAlumno(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        txtNombre.requestFocusInWindow();
         ruta = "src/datos/alumnos.txt";
         alumno = Helper.traerDatos(ruta);
         try {
