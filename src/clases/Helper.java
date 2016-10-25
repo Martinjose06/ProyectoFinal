@@ -69,11 +69,45 @@ public class Helper {
             tm.setValueAt(alumno.get(i).getClase(), i, 6);        
         }
     }
+    public static void LlenadoTabla(JTable tabla, ArrayList<Alumno> alumno) {
+        int nf;
+        DefaultTableModel tm;
+        tm = (DefaultTableModel) tabla.getModel();
+        nf = alumno.size();
+        tm.setRowCount(nf);
+        LimpiarTabla(tabla);
+        for (int i = 0; i < nf; i++) {
+            tm.setValueAt(i + 1, i, 0);
+            tm.setValueAt(alumno.get(i).getIdentificacion(), i, 1);
+            tm.setValueAt(alumno.get(i).getNombre(), i, 2);
+            tm.setValueAt(alumno.get(i).getPrimer_apellido(), i, 3);
+            tm.setValueAt(alumno.get(i).getSegundo_apellido(), i, 4);
+            tm.setValueAt(alumno.get(i).getEdad(), i, 5);
+            tm.setValueAt(alumno.get(i).getClase(), i, 6);        
+        }
+    }
     
     public static void LlenadoTablaI(JTable tabla, String ruta) {
         int nf;
         DefaultTableModel tm;
         ArrayList<Instrumento> instrumento = traerDatos(ruta);
+        tm = (DefaultTableModel) tabla.getModel();
+        nf = instrumento.size();
+        tm.setRowCount(nf);
+        LimpiarTabla(tabla);
+        for (int i = 0; i < nf; i++) {
+            tm.setValueAt(i + 1, i, 0);
+            tm.setValueAt(instrumento.get(i).getNumero_registro(), i, 1);
+            tm.setValueAt(instrumento.get(i).getNombre(), i, 2);
+            tm.setValueAt(instrumento.get(i).getGenero(), i, 3);
+            tm.setValueAt(instrumento.get(i).getPrecio(), i, 4);
+            tm.setValueAt(instrumento.get(i).getColor(), i, 5);
+            tm.setValueAt(instrumento.get(i).getPeso(), i, 6);        
+        }
+    }
+    public static void LlenadoTablaI(JTable tabla, ArrayList<Instrumento> instrumento) {
+        int nf;
+        DefaultTableModel tm;
         tm = (DefaultTableModel) tabla.getModel();
         nf = instrumento.size();
         tm.setRowCount(nf);
@@ -151,15 +185,16 @@ public class Helper {
         }
     }
     
-    public static void ListadoPorGenero(JTable tabla, String ruta, String cantidad){
+    public static void ListadoPorGenero(JTable tabla, String ruta, String cantidad, String genero){
         ArrayList<Instrumento> instrumento = TraerDatosI(ruta);
         ArrayList<Instrumento> instrumentofiltrado = new ArrayList();
+        LlenadoTablaI(tabla, ruta);
         for (int i = 0; i < instrumento.size() ; i++) {
-            if(instrumento.get(i).getGenero().equalsIgnoreCase("Folclór")){
+            if(instrumento.get(i).getGenero().equals(genero)){
                 instrumentofiltrado.add(instrumento.get(i));
             }
             
         }
-        LlenadoTabla(tabla, instrumentofiltrado);
+        LlenadoTablaI(tabla, instrumentofiltrado);
     }
 }
