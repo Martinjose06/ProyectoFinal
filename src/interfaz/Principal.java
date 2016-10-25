@@ -79,6 +79,11 @@ public class Principal extends javax.swing.JFrame {
 
         MnInstrumento.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         MnInstrumento.setText("Instrumento");
+        MnInstrumento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnInstrumentoActionPerformed(evt);
+            }
+        });
         MnReporte.add(MnInstrumento);
 
         jMenu1.add(MnReporte);
@@ -138,14 +143,11 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void MnAgregarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnAgregarAlumnoActionPerformed
-
         AgregarAlumno a = new AgregarAlumno(this, true);
         a.setVisible(true);
-
     }//GEN-LAST:event_MnAgregarAlumnoActionPerformed
 
     private void MnAgregarInstrumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnAgregarInstrumentoActionPerformed
-
         AgregarInstrumento i = new AgregarInstrumento(this, true);
         i.setVisible(true);
     }//GEN-LAST:event_MnAgregarInstrumentoActionPerformed
@@ -155,11 +157,14 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_MnSalirActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-
         PanelSeleccion ps = new PanelSeleccion();
         ps.setVisible(true);
         dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void MnInstrumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnInstrumentoActionPerformed
+        
+    }//GEN-LAST:event_MnInstrumentoActionPerformed
 
     /**
      * @param args the command line arguments

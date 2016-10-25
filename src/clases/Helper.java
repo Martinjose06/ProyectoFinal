@@ -38,28 +38,27 @@ public class Helper {
         }
         return retorno;
     }
-    public static void limpiarTabla(JTable tabla) {
+    
+    public static void LimpiarTabla(JTable tabla) {
         int nf, nc;
         nf = tabla.getRowCount();
         nc = tabla.getColumnCount();
 
         for (int i = 0; i < nf; i++) {
             for (int j = 0; j < nc; j++) {
-
                 tabla.setValueAt("", i, j);
-
             }
-
         }
     }
-    public static void llenadoTabla(JTable tabla, String ruta) {
+    
+    public static void LlenadoTabla(JTable tabla, String ruta) {
         int nf;
         DefaultTableModel tm;
         ArrayList<Alumno> alumno = traerDatos(ruta);
         tm = (DefaultTableModel) tabla.getModel();
         nf = alumno.size();
         tm.setRowCount(nf);
-        limpiarTabla(tabla);
+        LimpiarTabla(tabla);
         for (int i = 0; i < nf; i++) {
             tm.setValueAt(i + 1, i, 0);
             tm.setValueAt(alumno.get(i).getIdentificacion(), i, 1);
@@ -67,18 +66,18 @@ public class Helper {
             tm.setValueAt(alumno.get(i).getPrimer_apellido(), i, 3);
             tm.setValueAt(alumno.get(i).getSegundo_apellido(), i, 4);
             tm.setValueAt(alumno.get(i).getEdad(), i, 5);
-            tm.setValueAt(alumno.get(i).getClase(), i, 6);
-            
+            tm.setValueAt(alumno.get(i).getClase(), i, 6);        
         }
     }
-    public static void llenadoTablaI(JTable tabla, String ruta) {
+    
+    public static void LlenadoTablaI(JTable tabla, String ruta) {
         int nf;
         DefaultTableModel tm;
         ArrayList<Instrumento> instrumento = traerDatos(ruta);
         tm = (DefaultTableModel) tabla.getModel();
         nf = instrumento.size();
         tm.setRowCount(nf);
-        limpiarTabla(tabla);
+        LimpiarTabla(tabla);
         for (int i = 0; i < nf; i++) {
             tm.setValueAt(i + 1, i, 0);
             tm.setValueAt(instrumento.get(i).getNumero_registro(), i, 1);
@@ -86,8 +85,7 @@ public class Helper {
             tm.setValueAt(instrumento.get(i).getGenero(), i, 3);
             tm.setValueAt(instrumento.get(i).getPrecio(), i, 4);
             tm.setValueAt(instrumento.get(i).getColor(), i, 5);
-            tm.setValueAt(instrumento.get(i).getPeso(), i, 6);
-            
+            tm.setValueAt(instrumento.get(i).getPeso(), i, 6);        
         }
     }
 
@@ -101,20 +99,18 @@ public class Helper {
             entrada = new ObjectInputStream(archivo);
             while((p=entrada.readObject())!=null){
                 alumno.add(p);
-            }
-            
+            }   
         } catch (FileNotFoundException ex) {
             System.out.println(ex.getMessage());        
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Helper.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
-        
        return alumno;
-
     }
-    public static ArrayList traerDatosI(String ruta){
+    
+    public static ArrayList TraerDatosI(String ruta){
         FileInputStream archivo;
             ObjectInputStream entrada;
             ArrayList instrumento = new ArrayList();
@@ -125,36 +121,45 @@ public class Helper {
             while((p=entrada.readObject())!=null){
                 instrumento.add(p);
             }
-            
         } catch (FileNotFoundException ex) {
             System.out.println(ex.getMessage());        
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Helper.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
-        
        return instrumento;
-
     }
-    public static void volcado(ObjectOutputStream salida, ArrayList alumno){
+    
+    public static void Volcado(ObjectOutputStream salida, ArrayList alumno){
         for (int i = 0; i < alumno.size(); i++) {
             try {
                 salida.writeObject(alumno.get(i));
             } catch (IOException ex) {
                 System.out.println(ex.getMessage());
-            }
-            
+            }   
         }
     }
-    public static void volcadoI(ObjectOutputStream salida, ArrayList instrumento){
+    
+    public static void VolcadoI(ObjectOutputStream salida, ArrayList instrumento){
         for (int i = 0; i < instrumento.size(); i++) {
             try {
                 salida.writeObject(instrumento.get(i));
             } catch (IOException ex) {
                 System.out.println(ex.getMessage());
             }
+        }
+    }
+    
+    public static void ListadoPorGenero(JTable tabla, String ruta, String cantidad){
+        ArrayList<Instrumento> instrumento = TraerDatosI(ruta);
+        ArrayList<Instrumento> instrumentofiltrado = new ArrayList();
+        for (int i = 0; i < instrumento.size() ; i++) {
+            if(instrumento.get(i).getGenero().equalsIgnoreCase("Folclór")){
+                instrumentofiltrado.add(instrumento.get(i));
+            }
             
         }
+        LlenadoTabla(tabla, instrumentofiltrado);
     }
 }

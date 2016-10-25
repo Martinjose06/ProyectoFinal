@@ -12,8 +12,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -37,13 +35,12 @@ public class AgregarAlumno extends javax.swing.JDialog {
         alumno = Helper.traerDatos(ruta);
         try {
             salida = new ObjectOutputStream(new FileOutputStream(ruta));
-            Helper.volcado(salida, alumno);
-            Helper.limpiarTabla(tblTabla);
-            Helper.llenadoTabla(tblTabla, ruta);
+            Helper.Volcado(salida, alumno);
+            Helper.LimpiarTabla(tblTabla);
+            Helper.LlenadoTabla(tblTabla, ruta);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-
     }
 
     /**
@@ -265,7 +262,6 @@ public class AgregarAlumno extends javax.swing.JDialog {
         } catch (Exception e) {
             Helper.mensaje(this, "Por favor digite datos correctos", "Error", 2);
         }
-
         if (txtIdentificacion.getText().isEmpty() || txtClase.getText().isEmpty() || txtEdad.getText().isEmpty() || txtNombre.getText().isEmpty() || txtPrimer_Apellido.getText().isEmpty() || txtSegundo_Apellido.getText().isEmpty()) {
             Helper.mensaje(this, "No puede dejar campos vacios", "Error", 2);
         } else {
@@ -277,7 +273,7 @@ public class AgregarAlumno extends javax.swing.JDialog {
             } catch (IOException ex) {
                 System.out.println(ex.getMessage());
             }
-            Helper.llenadoTabla(tblTabla, ruta);
+            Helper.LlenadoTabla(tblTabla, ruta);
             txtIdentificacion.setText("");
             txtClase.setText("");
             txtEdad.setText("");
@@ -300,8 +296,8 @@ public class AgregarAlumno extends javax.swing.JDialog {
                 i = tblTabla.getSelectedRow();
                 alumno.remove(i);
                 salida = new ObjectOutputStream(new FileOutputStream(ruta));
-                Helper.volcado(salida, alumno);
-                Helper.llenadoTabla(tblTabla, ruta);
+                Helper.Volcado(salida, alumno);
+                Helper.LlenadoTabla(tblTabla, ruta);
                 txtClase.setText("");
                 txtEdad.setText("");
                 txtIdentificacion.setText("");
@@ -407,7 +403,6 @@ public class AgregarAlumno extends javax.swing.JDialog {
         txtPrimer_Apellido.setText("");
         txtSegundo_Apellido.setText("");
         txtNombre.requestFocusInWindow();
-
     }//GEN-LAST:event_cmdLimpiarActionPerformed
 
     /**

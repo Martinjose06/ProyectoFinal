@@ -13,8 +13,6 @@ import java.io.IOException;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -35,12 +33,12 @@ public class AgregarInstrumento extends javax.swing.JDialog {
         initComponents();
         txtRegistro.requestFocusInWindow();
         ruta = "src/datos/instrumentos.txt";
-        instrumento = Helper.traerDatosI(ruta);
+        instrumento = Helper.TraerDatosI(ruta);
         try {
             salida = new ObjectOutputStream(new FileOutputStream(ruta));
-            Helper.volcado(salida, instrumento);
-            Helper.limpiarTabla(tblTabla);
-            Helper.llenadoTablaI(tblTabla, ruta);
+            Helper.Volcado(salida, instrumento);
+            Helper.LimpiarTabla(tblTabla);
+            Helper.LlenadoTablaI(tblTabla, ruta);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
@@ -257,7 +255,6 @@ public class AgregarInstrumento extends javax.swing.JDialog {
         } catch (Exception e) {
             Helper.mensaje(this, "Por favor digite datos correctos", "Error", 2);
         }
-
         if (txtColor.getText().isEmpty() || txtGenero.getText().isEmpty() || txtNombre.getText().isEmpty() || txtPeso.getText().isEmpty() || txtPrecio.getText().isEmpty() || txtRegistro.getText().isEmpty()) {
             Helper.mensaje(this, "No puede dejar campos vacios", "Error", 2);
         } else {
@@ -270,7 +267,7 @@ public class AgregarInstrumento extends javax.swing.JDialog {
                 System.out.println(ex.getMessage());
             }
 
-            Helper.llenadoTablaI(tblTabla, ruta);
+            Helper.LlenadoTablaI(tblTabla, ruta);
             txtColor.setText("");
             txtGenero.setText("");
             txtPeso.setText("");
@@ -293,8 +290,8 @@ public class AgregarInstrumento extends javax.swing.JDialog {
                 i = tblTabla.getSelectedRow();
                 instrumento.remove(i);
                 salida = new ObjectOutputStream(new FileOutputStream(ruta));
-                Helper.volcadoI(salida, instrumento);
-                Helper.llenadoTablaI(tblTabla, ruta);
+                Helper.VolcadoI(salida, instrumento);
+                Helper.LlenadoTablaI(tblTabla, ruta);
                 txtColor.setText("");
                 txtGenero.setText("");
                 txtNombre.setText("");
@@ -318,7 +315,6 @@ public class AgregarInstrumento extends javax.swing.JDialog {
         txtPeso.setText("");
         txtPrecio.setText("");
         txtRegistro.setText("");
-
         txtRegistro.requestFocusInWindow();
     }//GEN-LAST:event_cmdLimpiarActionPerformed
 
@@ -392,7 +388,7 @@ public class AgregarInstrumento extends javax.swing.JDialog {
         // TODO add your handling code here:
         Instrumento p;
         int i;
-        instrumento = Helper.traerDatosI(ruta);
+        instrumento = Helper.TraerDatosI(ruta);
         i = tblTabla.getSelectedRow();
         p = instrumento.get(i);
 
