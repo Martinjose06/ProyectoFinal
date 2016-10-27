@@ -32,6 +32,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Alumno"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MnAlumnoActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="MnInstrumento">
                   <Properties>

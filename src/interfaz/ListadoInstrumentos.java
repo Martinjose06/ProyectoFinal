@@ -5,6 +5,8 @@
  */
 package interfaz;
 
+import clases.Helper;
+
 /**
  *
  * @author w8
@@ -14,9 +16,12 @@ public class ListadoInstrumentos extends javax.swing.JDialog {
     /**
      * Creates new form ListadoInstrumentos
      */
+    String ruta;
+
     public ListadoInstrumentos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        ruta = "src/datos/instrumentos.txt";
     }
 
     /**
@@ -45,7 +50,7 @@ public class ListadoInstrumentos extends javax.swing.JDialog {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmbListado.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        cmbListado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cantidad de instrumentos", "Instrumentos de folclór", "Instrumentos de vallenato", "Instrumentos de salsa" }));
+        cmbListado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Folclór", "Vallenato", "Salsa" }));
         jPanel2.add(cmbListado, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 160, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 220, 80));
@@ -55,9 +60,14 @@ public class ListadoInstrumentos extends javax.swing.JDialog {
 
         cmdListar.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         cmdListar.setText("Listar");
-        jPanel3.add(cmdListar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        cmdListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdListarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(cmdListar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 80, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, 100, 80));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 100, 80));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Instrumentos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 12))); // NOI18N
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -68,7 +78,7 @@ public class ListadoInstrumentos extends javax.swing.JDialog {
 
             },
             new String [] {
-                "No.", "Cantidad / Genero", "Nombre"
+                "No.", "Genero", "Nombre"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -99,6 +109,12 @@ public class ListadoInstrumentos extends javax.swing.JDialog {
         setSize(new java.awt.Dimension(436, 356));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmdListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdListarActionPerformed
+        // TODO add your handling code here:
+        String opcion = cmbListado.getSelectedItem().toString();
+        Helper.ListadoPorGenero(tblListado, ruta, opcion);
+    }//GEN-LAST:event_cmdListarActionPerformed
 
     /**
      * @param args the command line arguments

@@ -32,7 +32,7 @@ public class AgregarAlumno extends javax.swing.JDialog {
         initComponents();
         txtNombre.requestFocusInWindow();
         ruta = "src/datos/alumnos.txt";
-        alumno = Helper.traerDatos(ruta);
+        alumno = Helper.TraerDatos(ruta);
         try {
             salida = new ObjectOutputStream(new FileOutputStream(ruta));
             Helper.Volcado(salida, alumno);
@@ -383,7 +383,7 @@ public class AgregarAlumno extends javax.swing.JDialog {
         // TODO add your handling code here:
         Alumno p;
         int i;
-        alumno = Helper.traerDatos(ruta);
+        alumno = Helper.TraerDatos(ruta);
         i = tblTabla.getSelectedRow();
         p = alumno.get(i);
 

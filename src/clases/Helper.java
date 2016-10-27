@@ -12,8 +12,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -54,7 +52,7 @@ public class Helper {
     public static void LlenadoTabla(JTable tabla, String ruta) {
         int nf;
         DefaultTableModel tm;
-        ArrayList<Alumno> alumno = traerDatos(ruta);
+        ArrayList<Alumno> alumno = TraerDatos(ruta);
         tm = (DefaultTableModel) tabla.getModel();
         nf = alumno.size();
         tm.setRowCount(nf);
@@ -90,7 +88,7 @@ public class Helper {
     public static void LlenadoTablaI(JTable tabla, String ruta) {
         int nf;
         DefaultTableModel tm;
-        ArrayList<Instrumento> instrumento = traerDatos(ruta);
+        ArrayList<Instrumento> instrumento = TraerDatos(ruta);
         tm = (DefaultTableModel) tabla.getModel();
         nf = instrumento.size();
         tm.setRowCount(nf);
@@ -105,25 +103,22 @@ public class Helper {
             tm.setValueAt(instrumento.get(i).getPeso(), i, 6);        
         }
     }
-    public static void LlenadoTablaI(JTable tabla, ArrayList<Instrumento> instrumento) {
+    
+    public static void LlenadoTablaI(JTable tabla, ArrayList<Instrumento> instrumentos){
         int nf;
         DefaultTableModel tm;
-        tm = (DefaultTableModel) tabla.getModel();
-        nf = instrumento.size();
+        tm = (DefaultTableModel)tabla.getModel();
+        nf = instrumentos.size();
         tm.setRowCount(nf);
         LimpiarTabla(tabla);
         for (int i = 0; i < nf; i++) {
-            tm.setValueAt(i + 1, i, 0);
-            tm.setValueAt(instrumento.get(i).getNumero_registro(), i, 1);
-            tm.setValueAt(instrumento.get(i).getNombre(), i, 2);
-            tm.setValueAt(instrumento.get(i).getGenero(), i, 3);
-            tm.setValueAt(instrumento.get(i).getPrecio(), i, 4);
-            tm.setValueAt(instrumento.get(i).getColor(), i, 5);
-            tm.setValueAt(instrumento.get(i).getPeso(), i, 6);        
+           tm.setValueAt(i + 1, i, 0);
+           tm.setValueAt(instrumentos.get(i).getGenero(), i, 1);
+           tm.setValueAt(instrumentos.get(i).getNombre(), i, 2);
         }
     }
 
-    public static ArrayList traerDatos(String ruta){
+    public static ArrayList TraerDatos(String ruta){
         FileInputStream archivo;
             ObjectInputStream entrada;
             ArrayList alumno = new ArrayList();
@@ -185,16 +180,15 @@ public class Helper {
         }
     }
     
-    public static void ListadoPorGenero(JTable tabla, String ruta, String cantidad, String genero){
-        ArrayList<Instrumento> instrumento = TraerDatosI(ruta);
-        ArrayList<Instrumento> instrumentofiltrado = new ArrayList();
-        LlenadoTablaI(tabla, ruta);
-        for (int i = 0; i < instrumento.size() ; i++) {
-            if(instrumento.get(i).getGenero().equals(genero)){
-                instrumentofiltrado.add(instrumento.get(i));
-            }
-            
+    public static void ListadoPorGenero(JTable tabla, String ruta, String genero){
+        ArrayList<Instrumento> instrumentos = TraerDatosI(ruta);
+        ArrayList<Instrumento> instrumentosFiltrados = new ArrayList();
+        for (int i = 0; i < instrumentos.size(); i++) {
+            if(instrumentos.get(i).getGenero().equals(genero)){
+                instrumentosFiltrados.add(instrumentos.get(i));
+            }         
         }
-        LlenadoTablaI(tabla, instrumentofiltrado);
+        LlenadoTablaI(tabla, instrumentosFiltrados);
     }
+    
 }

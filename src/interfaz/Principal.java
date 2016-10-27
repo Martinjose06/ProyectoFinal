@@ -75,6 +75,11 @@ public class Principal extends javax.swing.JFrame {
 
         MnAlumno.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         MnAlumno.setText("Alumno");
+        MnAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnAlumnoActionPerformed(evt);
+            }
+        });
         MnReporte.add(MnAlumno);
 
         MnInstrumento.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
@@ -163,8 +168,15 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void MnInstrumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnInstrumentoActionPerformed
-        
+        ListadoInstrumentos i = new ListadoInstrumentos(this, true);
+        i.setVisible(true);
     }//GEN-LAST:event_MnInstrumentoActionPerformed
+
+    private void MnAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnAlumnoActionPerformed
+        // TODO add your handling code here:
+        ListadoAlumnos i = new ListadoAlumnos(this, true);
+        i.setVisible(true);
+    }//GEN-LAST:event_MnAlumnoActionPerformed
 
     /**
      * @param args the command line arguments
