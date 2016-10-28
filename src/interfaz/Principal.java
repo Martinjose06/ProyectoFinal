@@ -179,7 +179,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void MnAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnAlumnoActionPerformed
         // TODO add your handling code here:
-        ListadoAlumnos i = new ListadoAlumnos(this, true);
+        ListadoAlumnosPorSexo i = new ListadoAlumnosPorSexo(this, true);
         i.setVisible(true);
     }//GEN-LAST:event_MnAlumnoActionPerformed
 

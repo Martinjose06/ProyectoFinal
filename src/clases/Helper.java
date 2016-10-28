@@ -202,6 +202,16 @@ public class Helper {
         }
         LlenadoTabla(tabla, alumnosFiltrados);
     }
+    public static void ListadoAlumnoPorClase(JTable tabla, String ruta, String clase){
+        ArrayList<Alumno> alumnos = TraerDatos(ruta);
+        ArrayList<Alumno> alumnosFiltrados = new ArrayList();
+        for (int i = 0; i < alumnos.size(); i++) {
+            if(alumnos.get(i).getClase().equals(clase)){
+                alumnosFiltrados.add(alumnos.get(i));
+            }         
+        }
+        LlenadoTabla(tabla, alumnosFiltrados);
+    }
     
     
     
