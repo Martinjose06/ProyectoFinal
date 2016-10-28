@@ -61,11 +61,13 @@ public class AgregarAlumno extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         txtPrimer_Apellido = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtSegundo_Apellido = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtEdad = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtClase = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtSegundo_Apellido = new javax.swing.JTextField();
+        cmbSexo = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         cmdAgregar = new javax.swing.JButton();
@@ -125,14 +127,6 @@ public class AgregarAlumno extends javax.swing.JDialog {
         jLabel4.setText("Segundo Apellido");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
-        txtSegundo_Apellido.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        txtSegundo_Apellido.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtSegundo_ApellidoKeyTyped(evt);
-            }
-        });
-        jPanel2.add(txtSegundo_Apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 70, -1));
-
         jLabel5.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel5.setText("Edad");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, -1, -1));
@@ -157,7 +151,22 @@ public class AgregarAlumno extends javax.swing.JDialog {
         });
         jPanel2.add(txtClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 70, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 380, 190));
+        jLabel8.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel8.setText("Sexo");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
+
+        txtSegundo_Apellido.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        txtSegundo_Apellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSegundo_ApellidoKeyTyped(evt);
+            }
+        });
+        jPanel2.add(txtSegundo_Apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 70, -1));
+
+        cmbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino", "Indefinido" }));
+        jPanel2.add(cmbSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 120, -1));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 380, 220));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 30, -1, 160));
@@ -194,7 +203,7 @@ public class AgregarAlumno extends javax.swing.JDialog {
         });
         jPanel4.add(cmdLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 150, 90, -1));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 30, 110, 200));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 30, 110, 200));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informacion", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 12))); // NOI18N
         jPanel5.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
@@ -206,11 +215,11 @@ public class AgregarAlumno extends javax.swing.JDialog {
 
             },
             new String [] {
-                "No.", "Identificacion", "Nombre", "Primer Apellido", "Segundo Apellido", "Edad", "Clase"
+                "No.", "Identificacion", "Nombre", "Primer Apellido", "Segundo Apellido", "Edad", "Clase", "Sexo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -225,9 +234,9 @@ public class AgregarAlumno extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tblTabla);
 
-        jPanel5.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 700, 200));
+        jPanel5.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 760, 200));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 720, 230));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 780, 230));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Grupo Folclorico.jpeg"))); // NOI18N
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -40, -1, -1));
@@ -250,7 +259,7 @@ public class AgregarAlumno extends javax.swing.JDialog {
 
     private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
 
-        String identificacion = null, nombre = null, primer_apellido = null, segundo_apellido = null, edad = null, clase = null;
+        String identificacion = null, nombre = null, primer_apellido = null, segundo_apellido = null, edad = null, clase = null, sexo = null;
 
         try {
             identificacion = txtIdentificacion.getText();
@@ -259,6 +268,7 @@ public class AgregarAlumno extends javax.swing.JDialog {
             segundo_apellido = txtSegundo_Apellido.getText();
             edad = txtEdad.getText();
             clase = txtClase.getText();
+            sexo = cmbSexo.getSelectedItem().toString();
         } catch (Exception e) {
             Helper.mensaje(this, "Por favor digite datos correctos", "Error", 2);
         }
@@ -266,7 +276,7 @@ public class AgregarAlumno extends javax.swing.JDialog {
             Helper.mensaje(this, "No puede dejar campos vacios", "Error", 2);
         } else {
 
-            Alumno a = new Alumno(identificacion, nombre, primer_apellido, segundo_apellido, edad, clase);
+            Alumno a = new Alumno(identificacion, nombre, primer_apellido, segundo_apellido, edad, clase, sexo);
 
             try {
                 a.guardar(salida);
@@ -281,6 +291,7 @@ public class AgregarAlumno extends javax.swing.JDialog {
             txtPrimer_Apellido.setText("");
             txtSegundo_Apellido.setText("");
             txtNombre.requestFocusInWindow();
+            cmbSexo.setSelectedItem(0);
         }
     }//GEN-LAST:event_cmdAgregarActionPerformed
 
@@ -304,7 +315,7 @@ public class AgregarAlumno extends javax.swing.JDialog {
                 txtNombre.setText("");
                 txtPrimer_Apellido.setText("");
                 txtSegundo_Apellido.setText("");
-                txtIdentificacion.requestFocusInWindow();
+                txtNombre.requestFocusInWindow();
             } catch (FileNotFoundException ex) {
                 System.out.println(ex.getMessage());
             } catch (IOException ex) {
@@ -334,17 +345,6 @@ public class AgregarAlumno extends javax.swing.JDialog {
             evt.consume();
         }
     }//GEN-LAST:event_txtPrimer_ApellidoKeyTyped
-
-    private void txtSegundo_ApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegundo_ApellidoKeyTyped
-        // TODO add your handling code here:
-        char c = evt.getKeyChar();
-
-        if (!Character.isAlphabetic(c)) {
-            getToolkit().beep();
-
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtSegundo_ApellidoKeyTyped
 
     private void txtClaseKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClaseKeyTyped
         // TODO add your handling code here:
@@ -405,6 +405,10 @@ public class AgregarAlumno extends javax.swing.JDialog {
         txtNombre.requestFocusInWindow();
     }//GEN-LAST:event_cmdLimpiarActionPerformed
 
+    private void txtSegundo_ApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegundo_ApellidoKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSegundo_ApellidoKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -449,6 +453,7 @@ public class AgregarAlumno extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cmbSexo;
     private javax.swing.JButton cmdAgregar;
     private javax.swing.JButton cmdEliminar;
     private javax.swing.JButton cmdLimpiar;
@@ -459,6 +464,7 @@ public class AgregarAlumno extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

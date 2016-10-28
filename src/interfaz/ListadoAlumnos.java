@@ -16,13 +16,12 @@ public class ListadoAlumnos extends javax.swing.JDialog {
     /**
      * Creates new form ListadoAlumnos
      */
-    
     String ruta;
-    
+
     public ListadoAlumnos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        ruta = "src/datos/instrumentos.txt";
+        ruta = "src/datos/alumnos.txt";
     }
 
     /**
@@ -40,8 +39,9 @@ public class ListadoAlumnos extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         cmdListar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblListado = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblTabla = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -51,10 +51,15 @@ public class ListadoAlumnos extends javax.swing.JDialog {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmbListado.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        cmbListado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mujeres", "Hombres" }));
+        cmbListado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino", "Indefinido" }));
+        cmbListado.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbListadoItemStateChanged(evt);
+            }
+        });
         jPanel2.add(cmbListado, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 160, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 220, 80));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 220, 80));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 12))); // NOI18N
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -68,54 +73,66 @@ public class ListadoAlumnos extends javax.swing.JDialog {
         });
         jPanel3.add(cmdListar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 80, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 100, 80));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, 100, 80));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Instrumentos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 12))); // NOI18N
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tblListado.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        tblListado.setModel(new javax.swing.table.DefaultTableModel(
+        tblTabla.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        tblTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "No.", "Sexo", "Nombre"
+                "No.", "Identificacion", "Nombre", "Primer Apellido", "Segundo Apellido", "Edad", "Clase", "Sexo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tblListado);
+        tblTabla.setToolTipText("");
+        jScrollPane1.setViewportView(tblTabla);
 
-        jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 350, 150));
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 760, 200));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 390, 200));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 790, 250));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Grupo Folclorico.jpeg"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 824, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(449, 370));
+        setSize(new java.awt.Dimension(840, 494));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdListarActionPerformed
         // TODO add your handling code here:
         String opcion = cmbListado.getSelectedItem().toString();
-        
+        Helper.ListadoAlumnoPorSexo(tblTabla, ruta, opcion);
+
     }//GEN-LAST:event_cmdListarActionPerformed
+
+    private void cmbListadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbListadoItemStateChanged
+        String opcion = cmbListado.getSelectedItem().toString();
+        Helper.ListadoAlumnoPorSexo(tblTabla, ruta, opcion);
+    }//GEN-LAST:event_cmbListadoItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -162,11 +179,12 @@ public class ListadoAlumnos extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cmbListado;
     private javax.swing.JButton cmdListar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tblListado;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblTabla;
     // End of variables declaration//GEN-END:variables
 }

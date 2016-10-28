@@ -38,6 +38,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         MnReporte = new javax.swing.JMenu();
         MnAlumno = new javax.swing.JMenuItem();
+        mnReporteInstrumento = new javax.swing.JMenu();
         MnInstrumento = new javax.swing.JMenuItem();
         mnCerrarSesionAdmin = new javax.swing.JMenu();
         MnAgregar = new javax.swing.JMenu();
@@ -82,14 +83,18 @@ public class Principal extends javax.swing.JFrame {
         });
         MnReporte.add(MnAlumno);
 
+        mnReporteInstrumento.setText("Instrumento");
+
         MnInstrumento.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        MnInstrumento.setText("Instrumento");
+        MnInstrumento.setText("Reporte por genero");
         MnInstrumento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MnInstrumentoActionPerformed(evt);
             }
         });
-        MnReporte.add(MnInstrumento);
+        mnReporteInstrumento.add(MnInstrumento);
+
+        MnReporte.add(mnReporteInstrumento);
 
         jMenu1.add(MnReporte);
 
@@ -231,5 +236,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenu mnCerrarSesionAdmin;
+    private javax.swing.JMenu mnReporteInstrumento;
     // End of variables declaration//GEN-END:variables
 }

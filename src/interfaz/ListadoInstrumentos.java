@@ -113,7 +113,7 @@ public class ListadoInstrumentos extends javax.swing.JDialog {
     private void cmdListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdListarActionPerformed
         // TODO add your handling code here:
         String opcion = cmbListado.getSelectedItem().toString();
-        Helper.ListadoPorGenero(tblListado, ruta, opcion);
+        Helper.ListadoInstrumentoPorGenero(tblListado, ruta, opcion);
     }//GEN-LAST:event_cmdListarActionPerformed
 
     /**

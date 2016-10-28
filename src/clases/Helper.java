@@ -65,6 +65,7 @@ public class Helper {
             tm.setValueAt(alumno.get(i).getSegundo_apellido(), i, 4);
             tm.setValueAt(alumno.get(i).getEdad(), i, 5);
             tm.setValueAt(alumno.get(i).getClase(), i, 6);        
+            tm.setValueAt(alumno.get(i).getSexo(), i, 7);        
         }
     }
     public static void LlenadoTabla(JTable tabla, ArrayList<Alumno> alumno) {
@@ -82,6 +83,7 @@ public class Helper {
             tm.setValueAt(alumno.get(i).getSegundo_apellido(), i, 4);
             tm.setValueAt(alumno.get(i).getEdad(), i, 5);
             tm.setValueAt(alumno.get(i).getClase(), i, 6);        
+            tm.setValueAt(alumno.get(i).getSexo(), i, 7);
         }
     }
     
@@ -180,7 +182,7 @@ public class Helper {
         }
     }
     
-    public static void ListadoPorGenero(JTable tabla, String ruta, String genero){
+    public static void ListadoInstrumentoPorGenero(JTable tabla, String ruta, String genero){
         ArrayList<Instrumento> instrumentos = TraerDatosI(ruta);
         ArrayList<Instrumento> instrumentosFiltrados = new ArrayList();
         for (int i = 0; i < instrumentos.size(); i++) {
@@ -190,5 +192,17 @@ public class Helper {
         }
         LlenadoTablaI(tabla, instrumentosFiltrados);
     }
+    public static void ListadoAlumnoPorSexo(JTable tabla, String ruta, String sexo){
+        ArrayList<Alumno> alumnos = TraerDatos(ruta);
+        ArrayList<Alumno> alumnosFiltrados = new ArrayList();
+        for (int i = 0; i < alumnos.size(); i++) {
+            if(alumnos.get(i).getSexo().equals(sexo)){
+                alumnosFiltrados.add(alumnos.get(i));
+            }         
+        }
+        LlenadoTabla(tabla, alumnosFiltrados);
+    }
+    
+    
     
 }
