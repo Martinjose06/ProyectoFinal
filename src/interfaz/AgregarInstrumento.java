@@ -13,7 +13,12 @@ import java.io.IOException;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -27,6 +32,7 @@ public class AgregarInstrumento extends javax.swing.JDialog {
     String ruta;
     ObjectOutputStream salida;
     ArrayList<Instrumento> instrumento;
+    int aux = 0;
 
     public AgregarInstrumento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -39,6 +45,14 @@ public class AgregarInstrumento extends javax.swing.JDialog {
             Helper.Volcado(salida, instrumento);
             Helper.LimpiarTabla(tblTabla);
             Helper.LlenadoTablaI(tblTabla, ruta);
+            JButton botonesH[] = {cmdBuscar, cmdCancelar};
+            JButton botonesD[] = {cmdEliminar, cmdGuardar};
+            JTextField cajaD[] = {txtNombre, txtPeso, txtPrecio, txtColor, txtGenero};
+            JTextField cajaH[] = {txtRegistro};
+            Helper.habilitarBotones(botonesH);
+            Helper.deshabilitarBotones(botonesD);
+            Helper.editarCajaDeTexto(cajaH);
+            Helper.noEditarCajaTexto(cajaD);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
@@ -68,10 +82,11 @@ public class AgregarInstrumento extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         txtColor = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
-        cmdAgregar = new javax.swing.JButton();
+        cmdGuardar = new javax.swing.JButton();
         cmdEliminar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        cmdLimpiar = new javax.swing.JButton();
+        cmdCancelar = new javax.swing.JButton();
+        cmdBuscar = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTabla = new javax.swing.JTable();
@@ -162,14 +177,14 @@ public class AgregarInstrumento extends javax.swing.JDialog {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 12))); // NOI18N
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        cmdAgregar.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        cmdAgregar.setText("Agregar");
-        cmdAgregar.addActionListener(new java.awt.event.ActionListener() {
+        cmdGuardar.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        cmdGuardar.setText("Guardar");
+        cmdGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdAgregarActionPerformed(evt);
+                cmdGuardarActionPerformed(evt);
             }
         });
-        jPanel4.add(cmdAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 90, -1));
+        jPanel4.add(cmdGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 90, -1));
 
         cmdEliminar.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         cmdEliminar.setText("Eliminar");
@@ -178,17 +193,26 @@ public class AgregarInstrumento extends javax.swing.JDialog {
                 cmdEliminarActionPerformed(evt);
             }
         });
-        jPanel4.add(cmdEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 90, -1));
+        jPanel4.add(cmdEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 90, -1));
         jPanel4.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 90, -1));
 
-        cmdLimpiar.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        cmdLimpiar.setText("Limpiar");
-        cmdLimpiar.addActionListener(new java.awt.event.ActionListener() {
+        cmdCancelar.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        cmdCancelar.setText("Cancelar");
+        cmdCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdLimpiarActionPerformed(evt);
+                cmdCancelarActionPerformed(evt);
             }
         });
-        jPanel4.add(cmdLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 150, 90, -1));
+        jPanel4.add(cmdCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 150, 90, -1));
+
+        cmdBuscar.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        cmdBuscar.setText("Buscar");
+        cmdBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBuscarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(cmdBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 90, -1));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 30, 110, 200));
 
@@ -241,42 +265,67 @@ public class AgregarInstrumento extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
-
-        String nombre = null, genero = null, peso = null, color = null, registro = null, precio = null;
+    private void cmdGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardarActionPerformed
 
         try {
-            nombre = txtNombre.getText();
-            genero = txtGenero.getText();
-            peso = txtPeso.getText();
-            color = txtColor.getText();
-            registro = txtRegistro.getText();
-            precio = txtPrecio.getText();
-        } catch (Exception e) {
-            Helper.mensaje(this, "Por favor digite datos correctos", "Error", 2);
-        }
-        if (txtColor.getText().isEmpty() || txtGenero.getText().isEmpty() || txtNombre.getText().isEmpty() || txtPeso.getText().isEmpty() || txtPrecio.getText().isEmpty() || txtRegistro.getText().isEmpty()) {
-            Helper.mensaje(this, "No puede dejar campos vacios", "Error", 2);
-        } else {
-
-            Instrumento i = new Instrumento(nombre, genero, peso, color, precio, registro);
+            String nombre = null, genero = null, peso = null, color = null, registro = null, precio = null;
+            ArrayList<Instrumento> instrumentoActualizado;
 
             try {
-                i.guardar(salida);
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
+                nombre = txtNombre.getText();
+                genero = txtGenero.getText();
+                peso = txtPeso.getText();
+                color = txtColor.getText();
+                registro = txtRegistro.getText();
+                precio = txtPrecio.getText();
+            } catch (Exception e) {
+                Helper.mensaje(this, "Por favor digite datos correctos", "Error", 2);
             }
 
-            Helper.LlenadoTablaI(tblTabla, ruta);
-            txtColor.setText("");
-            txtGenero.setText("");
-            txtPeso.setText("");
-            txtNombre.setText("");
-            txtPrecio.setText("");
-            txtRegistro.setText("");
-            txtRegistro.requestFocusInWindow();
+            if (txtColor.getText().isEmpty() || txtGenero.getText().isEmpty() || txtNombre.getText().isEmpty() || txtPeso.getText().isEmpty() || txtPrecio.getText().isEmpty() || txtRegistro.getText().isEmpty()) {
+                Helper.mensaje(this, "No puede dejar campos vacios", "Error", 2);
+            } else {
+
+                if (aux == 0) {
+
+                    Instrumento i = new Instrumento(nombre, genero, peso, color, precio, registro);
+
+                    try {
+                        i.guardar(salida);
+                        txtNombre.requestFocusInWindow();
+                    } catch (IOException ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                    Helper.mensaje(this, "Datos guardados exitosamente", "Correcto!", 1);
+                    Helper.LlenadoTablaI(tblTabla, ruta);
+                    limpiar();
+
+                } else {
+
+                    instrumentoActualizado = Helper.actualizarInstrumento(ruta, nombre, genero, peso, color, precio, registro);
+                    salida = new ObjectOutputStream(new FileOutputStream(ruta));
+                    Helper.Volcado(salida, instrumentoActualizado);
+                    Helper.LlenadoTablaI(tblTabla, ruta);
+                    Helper.mensaje(this, "Datos actualizados exitosamente", "Correcto!", 1);
+
+                    limpiar();
+
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
-    }//GEN-LAST:event_cmdAgregarActionPerformed
+        JButton botonesH[] = {cmdBuscar, cmdCancelar};
+        JButton botonesD[] = {cmdEliminar, cmdGuardar};
+        JTextField cajaD[] = {txtNombre, txtPeso, txtPrecio, txtColor, txtGenero};
+        JTextField cajaH[] = {txtRegistro};
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
+        Helper.editarCajaDeTexto(cajaH);
+        Helper.noEditarCajaTexto(cajaD);
+    }//GEN-LAST:event_cmdGuardarActionPerformed
 
     private void cmdEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEliminarActionPerformed
         // TODO add your handling code here:
@@ -307,16 +356,10 @@ public class AgregarInstrumento extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_cmdEliminarActionPerformed
 
-    private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
+    private void cmdCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelarActionPerformed
         // TODO add your handling code here:
-        txtNombre.setText("");
-        txtColor.setText("");
-        txtGenero.setText("");
-        txtPeso.setText("");
-        txtPrecio.setText("");
-        txtRegistro.setText("");
-        txtRegistro.requestFocusInWindow();
-    }//GEN-LAST:event_cmdLimpiarActionPerformed
+        limpiar();
+    }//GEN-LAST:event_cmdCancelarActionPerformed
 
     private void txtRegistroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRegistroKeyTyped
         // TODO add your handling code here:
@@ -398,7 +441,42 @@ public class AgregarInstrumento extends javax.swing.JDialog {
         txtPeso.setText(p.getPeso());
         txtPrecio.setText(p.getPrecio());
         txtRegistro.setText(p.getNumero_registro());
+        aux = 1;
     }//GEN-LAST:event_tblTablaMouseClicked
+
+    private void cmdBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBuscarActionPerformed
+
+        String registro = txtRegistro.getText();
+        if (Helper.buscarPorNoRegistro(registro, ruta)) {
+            Instrumento i = Helper.traerInstrumento(registro, ruta);
+            txtColor.setText(i.getColor());
+            txtNombre.setText(i.getNombre());
+            txtGenero.setText(i.getGenero());
+            txtPeso.setText(i.getPeso());
+            txtPrecio.setText(i.getPrecio());
+            txtRegistro.setText(i.getNumero_registro());
+            aux = 1;
+        } else {
+            txtRegistro.requestFocusInWindow();
+            aux = 0;
+        }
+        JButton botonesH[] = {cmdEliminar, cmdGuardar, cmdCancelar};
+        JButton botonesD[] = {cmdBuscar};
+        JTextField cajaH[] = {txtRegistro, txtNombre, txtPeso, txtPrecio, txtColor, txtGenero};
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
+        Helper.editarCajaDeTexto(cajaH);
+    }//GEN-LAST:event_cmdBuscarActionPerformed
+
+    public void limpiar() {
+        txtNombre.setText("");
+        txtColor.setText("");
+        txtGenero.setText("");
+        txtPeso.setText("");
+        txtPrecio.setText("");
+        txtRegistro.setText("");
+        txtRegistro.requestFocusInWindow();
+    }
 
     /**
      * @param args the command line arguments
@@ -422,9 +500,11 @@ public class AgregarInstrumento extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(AgregarInstrumento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(AgregarInstrumento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AgregarInstrumento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(AgregarInstrumento.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+
         //</editor-fold>
 
         /* Create and display the dialog */
@@ -443,9 +523,10 @@ public class AgregarInstrumento extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cmdAgregar;
+    private javax.swing.JButton cmdBuscar;
+    private javax.swing.JButton cmdCancelar;
     private javax.swing.JButton cmdEliminar;
-    private javax.swing.JButton cmdLimpiar;
+    private javax.swing.JButton cmdGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

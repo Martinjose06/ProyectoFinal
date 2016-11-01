@@ -7,12 +7,17 @@ package interfaz;
 
 import clases.Alumno;
 import clases.Helper;
+import java.awt.TextField;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -26,11 +31,11 @@ public class AgregarAlumno extends javax.swing.JDialog {
     String ruta;
     ObjectOutputStream salida;
     ArrayList<Alumno> alumno;
+    int aux = 0;
 
     public AgregarAlumno(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        txtNombre.requestFocusInWindow();
         ruta = "src/datos/alumnos.txt";
         alumno = Helper.TraerDatos(ruta);
         try {
@@ -38,6 +43,15 @@ public class AgregarAlumno extends javax.swing.JDialog {
             Helper.Volcado(salida, alumno);
             Helper.LimpiarTabla(tblTabla);
             Helper.LlenadoTabla(tblTabla, ruta);
+            JButton botonesH[] = {cmdBuscar, cmdCancelar};
+            JButton botonesD[] = {cmdEliminar, cmdGuardar};
+            JTextField cajaD[] = {txtNombre, txtPrimer_Apellido, txtSegundo_Apellido, txtClase, txtEdad};
+            JTextField cajaH[] = {txtIdentificacion};
+            Helper.habilitarBotones(botonesH);
+            Helper.deshabilitarBotones(botonesD);
+            Helper.editarCajaDeTexto(cajaH);
+            Helper.noEditarCajaTexto(cajaD);
+
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
@@ -70,10 +84,11 @@ public class AgregarAlumno extends javax.swing.JDialog {
         cmbSexo = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        cmdAgregar = new javax.swing.JButton();
+        cmdGuardar = new javax.swing.JButton();
         cmdEliminar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        cmdLimpiar = new javax.swing.JButton();
+        cmdCancelar = new javax.swing.JButton();
+        cmdBuscar = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTabla = new javax.swing.JTable();
@@ -89,7 +104,7 @@ public class AgregarAlumno extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel1.setText("Identificacion");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, -1, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         txtIdentificacion.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         txtIdentificacion.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -97,11 +112,11 @@ public class AgregarAlumno extends javax.swing.JDialog {
                 txtIdentificacionKeyTyped(evt);
             }
         });
-        jPanel2.add(txtIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 70, -1));
+        jPanel2.add(txtIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 70, -1));
 
         jLabel2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel2.setText("Nombre");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, -1, -1));
 
         txtNombre.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -109,7 +124,7 @@ public class AgregarAlumno extends javax.swing.JDialog {
                 txtNombreKeyTyped(evt);
             }
         });
-        jPanel2.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 70, -1));
+        jPanel2.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 70, -1));
 
         jLabel3.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel3.setText("Primer Apellido");
@@ -156,11 +171,6 @@ public class AgregarAlumno extends javax.swing.JDialog {
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
 
         txtSegundo_Apellido.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        txtSegundo_Apellido.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtSegundo_ApellidoKeyTyped(evt);
-            }
-        });
         jPanel2.add(txtSegundo_Apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 70, -1));
 
         cmbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino", "Indefinido" }));
@@ -175,14 +185,14 @@ public class AgregarAlumno extends javax.swing.JDialog {
         jPanel4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        cmdAgregar.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        cmdAgregar.setText("Agregar");
-        cmdAgregar.addActionListener(new java.awt.event.ActionListener() {
+        cmdGuardar.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        cmdGuardar.setText("Guardar");
+        cmdGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdAgregarActionPerformed(evt);
+                cmdGuardarActionPerformed(evt);
             }
         });
-        jPanel4.add(cmdAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 90, -1));
+        jPanel4.add(cmdGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 90, -1));
 
         cmdEliminar.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         cmdEliminar.setText("Eliminar");
@@ -191,17 +201,26 @@ public class AgregarAlumno extends javax.swing.JDialog {
                 cmdEliminarActionPerformed(evt);
             }
         });
-        jPanel4.add(cmdEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 90, -1));
+        jPanel4.add(cmdEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 90, -1));
         jPanel4.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 90, -1));
 
-        cmdLimpiar.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        cmdLimpiar.setText("Limpiar");
-        cmdLimpiar.addActionListener(new java.awt.event.ActionListener() {
+        cmdCancelar.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        cmdCancelar.setText("Cancelar");
+        cmdCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdLimpiarActionPerformed(evt);
+                cmdCancelarActionPerformed(evt);
             }
         });
-        jPanel4.add(cmdLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 150, 90, -1));
+        jPanel4.add(cmdCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 150, 90, -1));
+
+        cmdBuscar.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        cmdBuscar.setText("Buscar");
+        cmdBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBuscarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(cmdBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 90, -1));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 30, 110, 200));
 
@@ -257,43 +276,63 @@ public class AgregarAlumno extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
-
-        String identificacion = null, nombre = null, primer_apellido = null, segundo_apellido = null, edad = null, clase = null, sexo = null;
+    private void cmdGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardarActionPerformed
 
         try {
-            identificacion = txtIdentificacion.getText();
-            nombre = txtNombre.getText();
-            primer_apellido = txtPrimer_Apellido.getText();
-            segundo_apellido = txtSegundo_Apellido.getText();
-            edad = txtEdad.getText();
-            clase = txtClase.getText();
-            sexo = cmbSexo.getSelectedItem().toString();
-        } catch (Exception e) {
-            Helper.mensaje(this, "Por favor digite datos correctos", "Error", 2);
-        }
-        if (txtIdentificacion.getText().isEmpty() || txtClase.getText().isEmpty() || txtEdad.getText().isEmpty() || txtNombre.getText().isEmpty() || txtPrimer_Apellido.getText().isEmpty() || txtSegundo_Apellido.getText().isEmpty()) {
-            Helper.mensaje(this, "No puede dejar campos vacios", "Error", 2);
-        } else {
-
-            Alumno a = new Alumno(identificacion, nombre, primer_apellido, segundo_apellido, edad, clase, sexo);
-
+            String identificacion = null, nombre = null, primer_apellido = null, segundo_apellido = null, edad = null, clase = null, sexo = null;
+            ArrayList<Alumno> alumnoActualizado;
             try {
-                a.guardar(salida);
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
+                identificacion = txtIdentificacion.getText();
+                nombre = txtNombre.getText();
+                primer_apellido = txtPrimer_Apellido.getText();
+                segundo_apellido = txtSegundo_Apellido.getText();
+                edad = txtEdad.getText();
+                clase = txtClase.getText();
+                sexo = cmbSexo.getSelectedItem().toString();
+
+            } catch (Exception e) {
+                Helper.mensaje(this, "Por favor digite datos correctos", "Error", 2);
             }
-            Helper.LlenadoTabla(tblTabla, ruta);
-            txtIdentificacion.setText("");
-            txtClase.setText("");
-            txtEdad.setText("");
-            txtNombre.setText("");
-            txtPrimer_Apellido.setText("");
-            txtSegundo_Apellido.setText("");
-            txtNombre.requestFocusInWindow();
-            cmbSexo.setSelectedItem(0);
+            if (txtIdentificacion.getText().isEmpty() || txtClase.getText().isEmpty() || txtEdad.getText().isEmpty() || txtNombre.getText().isEmpty() || txtPrimer_Apellido.getText().isEmpty() || txtSegundo_Apellido.getText().isEmpty()) {
+                Helper.mensaje(this, "No puede dejar campos vacios", "Error", 2);
+            } else {
+
+                if (aux == 0) {
+
+                    Alumno a = new Alumno(identificacion, nombre, primer_apellido, segundo_apellido, edad, clase, sexo);
+
+                    a.guardar(salida);
+                    txtNombre.requestFocusInWindow();
+                    Helper.mensaje(this, "Datos guardados exitosamente", "Correcto!", 1);
+                    Helper.LlenadoTabla(tblTabla, ruta);
+                    limpiar();
+                    
+
+                } else {
+                    alumnoActualizado = Helper.actualizarAlumno(ruta, identificacion, nombre, primer_apellido, segundo_apellido, edad, clase, sexo);
+                    salida = new ObjectOutputStream(new FileOutputStream(ruta));
+                    Helper.Volcado(salida, alumnoActualizado);
+                    Helper.LlenadoTabla(tblTabla, ruta);
+                    Helper.mensaje(this, "Datos actualizados exitosamente", "Correcto!", 1);
+
+                    limpiar();
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
-    }//GEN-LAST:event_cmdAgregarActionPerformed
+        JButton botonesH[] = {cmdBuscar, cmdCancelar};
+        JButton botonesD[] = {cmdEliminar, cmdGuardar};
+        JTextField cajaD[] = {txtNombre, txtPrimer_Apellido, txtSegundo_Apellido, txtClase, txtEdad};
+        JTextField cajaH[] = {txtIdentificacion};
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
+        Helper.editarCajaDeTexto(cajaH);
+        Helper.noEditarCajaTexto(cajaD);
+
+    }//GEN-LAST:event_cmdGuardarActionPerformed
 
     private void cmdEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEliminarActionPerformed
         // TODO add your handling code here:
@@ -309,13 +348,7 @@ public class AgregarAlumno extends javax.swing.JDialog {
                 salida = new ObjectOutputStream(new FileOutputStream(ruta));
                 Helper.Volcado(salida, alumno);
                 Helper.LlenadoTabla(tblTabla, ruta);
-                txtClase.setText("");
-                txtEdad.setText("");
-                txtIdentificacion.setText("");
-                txtNombre.setText("");
-                txtPrimer_Apellido.setText("");
-                txtSegundo_Apellido.setText("");
-                txtNombre.requestFocusInWindow();
+                limpiar();
             } catch (FileNotFoundException ex) {
                 System.out.println(ex.getMessage());
             } catch (IOException ex) {
@@ -393,21 +426,51 @@ public class AgregarAlumno extends javax.swing.JDialog {
         txtEdad.setText(p.getEdad());
         txtPrimer_Apellido.setText(p.getPrimer_apellido());
         txtSegundo_Apellido.setText(p.getSegundo_apellido());
+        cmbSexo.setSelectedItem(p.getSexo());
+        aux = 1;
     }//GEN-LAST:event_tblTablaMouseClicked
 
-    private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
-        txtClase.setText("");
-        txtNombre.setText("");
+    private void cmdCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelarActionPerformed
+        limpiar();
+    }//GEN-LAST:event_cmdCancelarActionPerformed
+
+    private void cmdBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBuscarActionPerformed
+
+        String identificacion = txtIdentificacion.getText();
+        if (Helper.buscarPorIdentificacion(identificacion, ruta)) {
+            Alumno a = Helper.traerAlumno(identificacion, ruta);
+            txtClase.setText(a.getClase());
+            txtNombre.setText(a.getNombre());
+            txtIdentificacion.setText(a.getIdentificacion());
+            txtEdad.setText(a.getEdad());
+            txtPrimer_Apellido.setText(a.getPrimer_apellido());
+            txtSegundo_Apellido.setText(a.getSegundo_apellido());
+            cmbSexo.setSelectedItem(a.getSexo());
+            aux = 1;
+        } else {
+            txtIdentificacion.requestFocusInWindow();
+            aux = 0;
+        }
+        JButton botonesH[] = {cmdEliminar, cmdGuardar, cmdCancelar};
+        JButton botonesD[] = {cmdBuscar};
+        JTextField cajaH[] = {txtIdentificacion, txtNombre, txtPrimer_Apellido, txtSegundo_Apellido, txtClase, txtEdad};
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
+        Helper.editarCajaDeTexto(cajaH);
+    }//GEN-LAST:event_cmdBuscarActionPerformed
+
+    public void limpiar() {
         txtIdentificacion.setText("");
+        txtClase.setText("");
         txtEdad.setText("");
+        txtNombre.setText("");
         txtPrimer_Apellido.setText("");
         txtSegundo_Apellido.setText("");
-        txtNombre.requestFocusInWindow();
-    }//GEN-LAST:event_cmdLimpiarActionPerformed
+        txtIdentificacion.requestFocusInWindow();
+        cmbSexo.setSelectedItem(0);
+        aux = 0;
 
-    private void txtSegundo_ApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegundo_ApellidoKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSegundo_ApellidoKeyTyped
+    }
 
     /**
      * @param args the command line arguments
@@ -454,9 +517,10 @@ public class AgregarAlumno extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cmbSexo;
-    private javax.swing.JButton cmdAgregar;
+    private javax.swing.JButton cmdBuscar;
+    private javax.swing.JButton cmdCancelar;
     private javax.swing.JButton cmdEliminar;
-    private javax.swing.JButton cmdLimpiar;
+    private javax.swing.JButton cmdGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

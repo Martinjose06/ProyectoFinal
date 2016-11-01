@@ -37,6 +37,7 @@ public class PrincipalVisitante extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         MnReporte = new javax.swing.JMenu();
         MnAlumno = new javax.swing.JMenuItem();
+        mnReporteInstrumento = new javax.swing.JMenu();
         MnInstrumento = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -70,11 +71,25 @@ public class PrincipalVisitante extends javax.swing.JFrame {
 
         MnAlumno.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         MnAlumno.setText("Alumno");
+        MnAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnAlumnoActionPerformed(evt);
+            }
+        });
         MnReporte.add(MnAlumno);
 
+        mnReporteInstrumento.setText("Instrumento");
+
         MnInstrumento.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        MnInstrumento.setText("Instrumento");
-        MnReporte.add(MnInstrumento);
+        MnInstrumento.setText("Reporte por genero");
+        MnInstrumento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnInstrumentoActionPerformed(evt);
+            }
+        });
+        mnReporteInstrumento.add(MnInstrumento);
+
+        MnReporte.add(mnReporteInstrumento);
 
         jMenu1.add(MnReporte);
 
@@ -120,6 +135,17 @@ public class PrincipalVisitante extends javax.swing.JFrame {
         ps.setVisible(true);
         dispose();
     }//GEN-LAST:event_mnCerrarSesionActionPerformed
+
+    private void MnInstrumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnInstrumentoActionPerformed
+        ListadoInstrumentos i = new ListadoInstrumentos(this, true);
+        i.setVisible(true);
+    }//GEN-LAST:event_MnInstrumentoActionPerformed
+
+    private void MnAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnAlumnoActionPerformed
+        // TODO add your handling code here:
+        ListadoAlumnosPorSexo i = new ListadoAlumnosPorSexo(this, true);
+        i.setVisible(true);
+    }//GEN-LAST:event_MnAlumnoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,5 +198,6 @@ public class PrincipalVisitante extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JMenuItem mnCerrarSesion;
+    private javax.swing.JMenu mnReporteInstrumento;
     // End of variables declaration//GEN-END:variables
 }
