@@ -52,11 +52,6 @@ public class ListadoAlumnosPorSexo extends javax.swing.JDialog {
 
         cmbListado.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         cmbListado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino", "Indefinido" }));
-        cmbListado.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbListadoItemStateChanged(evt);
-            }
-        });
         jPanel2.add(cmbListado, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 160, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 220, 80));
@@ -128,11 +123,6 @@ public class ListadoAlumnosPorSexo extends javax.swing.JDialog {
         Helper.ListadoAlumnoPorSexo(tblTabla, ruta, opcion);
 
     }//GEN-LAST:event_cmdListarActionPerformed
-
-    private void cmbListadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbListadoItemStateChanged
-        String opcion = cmbListado.getSelectedItem().toString();
-        Helper.ListadoAlumnoPorSexo(tblTabla, ruta, opcion);
-    }//GEN-LAST:event_cmbListadoItemStateChanged
 
     /**
      * @param args the command line arguments

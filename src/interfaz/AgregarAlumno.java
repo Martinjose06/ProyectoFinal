@@ -258,7 +258,7 @@ public class AgregarAlumno extends javax.swing.JDialog {
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 780, 230));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Grupo Folclorico.jpeg"))); // NOI18N
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -40, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -40, 880, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

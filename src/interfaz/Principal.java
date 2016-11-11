@@ -45,7 +45,7 @@ public class Principal extends javax.swing.JFrame {
         MnAgregarAlumno = new javax.swing.JMenuItem();
         MnAgregarInstrumento = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        MnCerrarSesion = new javax.swing.JMenuItem();
         MnSalir = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
@@ -127,13 +127,13 @@ public class Principal extends javax.swing.JFrame {
         mnCerrarSesionAdmin.add(MnAgregar);
         mnCerrarSesionAdmin.add(jSeparator1);
 
-        jMenuItem2.setText("Cerrar sesion Administrador");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        MnCerrarSesion.setText("Cerrar sesion Administrador");
+        MnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                MnCerrarSesionActionPerformed(evt);
             }
         });
-        mnCerrarSesionAdmin.add(jMenuItem2);
+        mnCerrarSesionAdmin.add(MnCerrarSesion);
 
         MnSalir.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         MnSalir.setText("Salir");
@@ -166,20 +166,20 @@ public class Principal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_MnSalirActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void MnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCerrarSesionActionPerformed
         PanelSeleccion ps = new PanelSeleccion();
         ps.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_MnCerrarSesionActionPerformed
 
     private void MnInstrumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnInstrumentoActionPerformed
-        ListadoInstrumentos i = new ListadoInstrumentos(this, true);
+        ReporteInstrumentos i = new ReporteInstrumentos(this, true);
         i.setVisible(true);
     }//GEN-LAST:event_MnInstrumentoActionPerformed
 
     private void MnAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnAlumnoActionPerformed
         // TODO add your handling code here:
-        ListadoAlumnosPorSexo i = new ListadoAlumnosPorSexo(this, true);
+        ReporteAlumno i = new ReporteAlumno(this, true);
         i.setVisible(true);
     }//GEN-LAST:event_MnAlumnoActionPerformed
 
@@ -223,6 +223,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem MnAgregarAlumno;
     private javax.swing.JMenuItem MnAgregarInstrumento;
     private javax.swing.JMenuItem MnAlumno;
+    private javax.swing.JMenuItem MnCerrarSesion;
     private javax.swing.JMenuItem MnInstrumento;
     private javax.swing.JMenu MnReporte;
     private javax.swing.JMenuItem MnSalir;
@@ -230,7 +231,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
