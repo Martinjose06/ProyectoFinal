@@ -40,7 +40,8 @@ public class ListadoInstrumentos extends javax.swing.JDialog {
         cmdListar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblListado = new javax.swing.JTable();
+        tblTabla = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -51,6 +52,11 @@ public class ListadoInstrumentos extends javax.swing.JDialog {
 
         cmbListado.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         cmbListado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Folclór", "Vallenato", "Salsa" }));
+        cmbListado.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbListadoItemStateChanged(evt);
+            }
+        });
         jPanel2.add(cmbListado, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 160, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 220, 80));
@@ -72,8 +78,8 @@ public class ListadoInstrumentos extends javax.swing.JDialog {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Instrumentos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 12))); // NOI18N
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tblListado.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        tblListado.setModel(new javax.swing.table.DefaultTableModel(
+        tblTabla.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        tblTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -89,11 +95,14 @@ public class ListadoInstrumentos extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tblListado);
+        jScrollPane2.setViewportView(tblTabla);
 
         jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 350, 150));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 390, 200));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Grupo Folclorico.jpeg"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,7 +112,7 @@ public class ListadoInstrumentos extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setSize(new java.awt.Dimension(436, 356));
@@ -113,8 +122,13 @@ public class ListadoInstrumentos extends javax.swing.JDialog {
     private void cmdListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdListarActionPerformed
         // TODO add your handling code here:
         String opcion = cmbListado.getSelectedItem().toString();
-        Helper.ListadoInstrumentoPorGenero(tblListado, ruta, opcion);
+        Helper.ListadoInstrumentoPorGenero(tblTabla, ruta, opcion);
     }//GEN-LAST:event_cmdListarActionPerformed
+
+    private void cmbListadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbListadoItemStateChanged
+        String opcion = cmbListado.getSelectedItem().toString();
+        Helper.ListadoInstrumentoPorGenero(tblTabla, ruta, opcion);
+    }//GEN-LAST:event_cmbListadoItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -161,11 +175,12 @@ public class ListadoInstrumentos extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cmbListado;
     private javax.swing.JButton cmdListar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tblListado;
+    private javax.swing.JTable tblTabla;
     // End of variables declaration//GEN-END:variables
 }

@@ -123,7 +123,6 @@ public class ListadoAlumnosPorClase extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdListarActionPerformed
-        // TODO add your handling code here:
         String opcion = cmbListado.getSelectedItem().toString();
         Helper.ListadoAlumnoPorClase(tblTabla, ruta, opcion);
 

@@ -34,11 +34,10 @@ public class PrincipalVisitante extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        MnReporte = new javax.swing.JMenu();
-        MnAlumno = new javax.swing.JMenuItem();
-        mnReporteInstrumento = new javax.swing.JMenu();
-        MnInstrumento = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        mnReportes = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        mnReportes1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mnCerrarSesion = new javax.swing.JMenuItem();
@@ -63,42 +62,39 @@ public class PrincipalVisitante extends javax.swing.JFrame {
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 370));
 
-        jMenu1.setText("Archivo");
-        jMenu1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jMenu3.setText("Alumnos");
 
-        MnReporte.setText("Reporte");
-        MnReporte.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-
-        MnAlumno.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        MnAlumno.setText("Alumno");
-        MnAlumno.addActionListener(new java.awt.event.ActionListener() {
+        mnReportes.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        mnReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Alumno.jpg"))); // NOI18N
+        mnReportes.setText("Reportes");
+        mnReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnAlumnoActionPerformed(evt);
+                mnReportesActionPerformed(evt);
             }
         });
-        MnReporte.add(MnAlumno);
+        jMenu3.add(mnReportes);
 
-        mnReporteInstrumento.setText("Instrumento");
+        jMenuBar1.add(jMenu3);
 
-        MnInstrumento.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        MnInstrumento.setText("Reporte por genero");
-        MnInstrumento.addActionListener(new java.awt.event.ActionListener() {
+        jMenu4.setText("Instrumentos");
+
+        mnReportes1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        mnReportes1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Instrumentow.png"))); // NOI18N
+        mnReportes1.setText("Reportes");
+        mnReportes1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnInstrumentoActionPerformed(evt);
+                mnReportes1ActionPerformed(evt);
             }
         });
-        mnReporteInstrumento.add(MnInstrumento);
+        jMenu4.add(mnReportes1);
 
-        MnReporte.add(mnReporteInstrumento);
-
-        jMenu1.add(MnReporte);
-
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMenu4);
 
         jMenu2.setText("Opciones");
         jMenu2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jMenu2.add(jSeparator1);
 
+        mnCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salir.png"))); // NOI18N
         mnCerrarSesion.setText("Cerrar sesion Visitante");
         mnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +105,7 @@ public class PrincipalVisitante extends javax.swing.JFrame {
         jMenu2.add(jSeparator2);
 
         MnSalir.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        MnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salir.png"))); // NOI18N
         MnSalir.setText("Salir");
         MnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,16 +133,15 @@ public class PrincipalVisitante extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_mnCerrarSesionActionPerformed
 
-    private void MnInstrumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnInstrumentoActionPerformed
-        ListadoInstrumentos i = new ListadoInstrumentos(this, true);
-        i.setVisible(true);
-    }//GEN-LAST:event_MnInstrumentoActionPerformed
+    private void mnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReportesActionPerformed
+        ReporteAlumno a = new ReporteAlumno(this, true);
+        a.setVisible(true);
+    }//GEN-LAST:event_mnReportesActionPerformed
 
-    private void MnAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnAlumnoActionPerformed
-        // TODO add your handling code here:
-        ListadoAlumnosPorSexo i = new ListadoAlumnosPorSexo(this, true);
+    private void mnReportes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReportes1ActionPerformed
+        ReporteInstrumentos i = new ReporteInstrumentos(this, true);
         i.setVisible(true);
-    }//GEN-LAST:event_MnAlumnoActionPerformed
+    }//GEN-LAST:event_mnReportes1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,13 +180,11 @@ public class PrincipalVisitante extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem MnAlumno;
-    private javax.swing.JMenuItem MnInstrumento;
-    private javax.swing.JMenu MnReporte;
     private javax.swing.JMenuItem MnSalir;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -198,6 +192,7 @@ public class PrincipalVisitante extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JMenuItem mnCerrarSesion;
-    private javax.swing.JMenu mnReporteInstrumento;
+    private javax.swing.JMenuItem mnReportes;
+    private javax.swing.JMenuItem mnReportes1;
     // End of variables declaration//GEN-END:variables
 }
