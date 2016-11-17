@@ -12,7 +12,7 @@ import java.io.ObjectOutputStream;
  *
  * @author LUCYLEONOR
  */
-public class Alumno implements java.io.Serializable {
+public class Alumno extends Generalidad implements java.io.Serializable {
 
     private String identificacion;
     private String nombre;
@@ -21,32 +21,19 @@ public class Alumno implements java.io.Serializable {
     private String edad;
     private String clase;
     private String sexo;
+    private Instrumento instrumento;
 
-    public Alumno(String identificacion, String nombre, String primer_apellido, String segundo_apellido, String edad, String clase, String sexo) {
-        this.identificacion = identificacion;
-        this.nombre = nombre;
+    public Alumno(String identificacion, String nombre, String primer_apellido, String segundo_apellido, String edad, String clase, String sexo, Instrumento instrumento) {
+        super(identificacion, nombre);
         this.primer_apellido = primer_apellido;
         this.segundo_apellido = segundo_apellido;
         this.edad = edad;
         this.clase = clase;
         this.sexo = sexo;
+        this.instrumento = instrumento;
     }
 
-    public String getIdentificacion() {
-        return identificacion;
-    }
-
-    public void setIdentificacion(String identificacion) {
-        this.identificacion = identificacion;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    
 
     public String getPrimer_apellido() {
         return primer_apellido;
@@ -87,6 +74,15 @@ public class Alumno implements java.io.Serializable {
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
+
+    public Instrumento getInstrumento() {
+        return instrumento;
+    }
+
+    public void setInstrumento(Instrumento instrumento) {
+        this.instrumento = instrumento;
+    }
+
     
 
     public void guardar(ObjectOutputStream salida) throws IOException {

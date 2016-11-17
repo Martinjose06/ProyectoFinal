@@ -47,12 +47,13 @@ public class AgregarInstrumento extends javax.swing.JDialog {
             Helper.LlenadoTablaI(tblTabla, ruta);
             JButton botonesH[] = {cmdBuscar, cmdCancelar};
             JButton botonesD[] = {cmdEliminar, cmdGuardar};
-            JTextField cajaD[] = {txtNombre, txtPeso, txtPrecio, txtColor, txtGenero};
+            JTextField cajaD[] = {txtNombre, txtPeso, txtPrecio, txtColor};
             JTextField cajaH[] = {txtRegistro};
             Helper.habilitarBotones(botonesH);
             Helper.deshabilitarBotones(botonesD);
             Helper.editarCajaDeTexto(cajaH);
             Helper.noEditarCajaTexto(cajaD);
+            cmbGenero.setEnabled(false);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
@@ -74,13 +75,13 @@ public class AgregarInstrumento extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtGenero = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtPeso = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtPrecio = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtColor = new javax.swing.JTextField();
+        cmbGenero = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         cmdGuardar = new javax.swing.JButton();
         cmdEliminar = new javax.swing.JButton();
@@ -129,17 +130,9 @@ public class AgregarInstrumento extends javax.swing.JDialog {
         jLabel3.setText("Genero");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
 
-        txtGenero.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        txtGenero.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtGeneroKeyTyped(evt);
-            }
-        });
-        jPanel2.add(txtGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 80, -1));
-
         jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel4.setText("Peso");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, -1, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, 30, -1));
 
         txtPeso.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         txtPeso.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -147,11 +140,11 @@ public class AgregarInstrumento extends javax.swing.JDialog {
                 txtPesoKeyTyped(evt);
             }
         });
-        jPanel2.add(txtPeso, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 70, -1));
+        jPanel2.add(txtPeso, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, 80, -1));
 
         jLabel5.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel5.setText("Precio");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, 40, -1));
 
         txtPrecio.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -159,11 +152,11 @@ public class AgregarInstrumento extends javax.swing.JDialog {
                 txtPrecioKeyTyped(evt);
             }
         });
-        jPanel2.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 70, -1));
+        jPanel2.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 80, -1));
 
         jLabel6.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel6.setText("Color");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 30, -1));
 
         txtColor.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         txtColor.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -171,9 +164,12 @@ public class AgregarInstrumento extends javax.swing.JDialog {
                 txtColorKeyTyped(evt);
             }
         });
-        jPanel2.add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 70, -1));
+        jPanel2.add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 80, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 380, 170));
+        cmbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vallenato", "Folclor", "Salsa", "General" }));
+        jPanel2.add(cmbGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 80, -1));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 460, 170));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 12))); // NOI18N
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -254,29 +250,26 @@ public class AgregarInstrumento extends javax.swing.JDialog {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 503));
 
-        pack();
+        setSize(new java.awt.Dimension(817, 542));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardarActionPerformed
 
-        try {
-            String nombre = null, genero = null, peso = null, color = null, registro = null, precio = null;
-            ArrayList<Instrumento> instrumentoActualizado;
+        String nombre, genero, peso, color, registro, precio;
+        ArrayList<Instrumento> instrumentoActualizado;
 
-            try {
+        try {
+            if (txtColor.getText().isEmpty() || txtNombre.getText().isEmpty() || txtPeso.getText().isEmpty() || txtPrecio.getText().isEmpty() || txtRegistro.getText().isEmpty()) {
+                Helper.mensaje(this, "No puede dejar campos vacios", "Error", 2);
+                txtNombre.requestFocusInWindow();
+            } else {
                 nombre = txtNombre.getText();
-                genero = txtGenero.getText();
+                genero = cmbGenero.getSelectedItem().toString();
                 peso = txtPeso.getText();
                 color = txtColor.getText();
                 registro = txtRegistro.getText();
                 precio = txtPrecio.getText();
-            } catch (Exception e) {
-                Helper.mensaje(this, "Por favor digite datos correctos", "Error", 2);
-            }
-
-            if (txtColor.getText().isEmpty() || txtGenero.getText().isEmpty() || txtNombre.getText().isEmpty() || txtPeso.getText().isEmpty() || txtPrecio.getText().isEmpty() || txtRegistro.getText().isEmpty()) {
-                Helper.mensaje(this, "No puede dejar campos vacios", "Error", 2);
-            } else {
 
                 if (aux == 0) {
 
@@ -291,6 +284,16 @@ public class AgregarInstrumento extends javax.swing.JDialog {
                     Helper.mensaje(this, "Datos guardados exitosamente", "Correcto!", 1);
                     Helper.LlenadoTablaI(tblTabla, ruta);
                     limpiar();
+                    JButton botonesH[] = {cmdBuscar, cmdCancelar};
+                    JButton botonesD[] = {cmdEliminar, cmdGuardar};
+                    JTextField cajaD[] = {txtNombre, txtPeso, txtPrecio, txtColor};
+                    JTextField cajaH[] = {txtRegistro};
+                    Helper.habilitarBotones(botonesH);
+                    Helper.deshabilitarBotones(botonesD);
+                    Helper.editarCajaDeTexto(cajaH);
+                    Helper.noEditarCajaTexto(cajaD);
+                    cmbGenero.setEnabled(false);
+                    cmbGenero.setSelectedItem(0);
 
                 } else {
 
@@ -301,6 +304,16 @@ public class AgregarInstrumento extends javax.swing.JDialog {
                     Helper.mensaje(this, "Datos actualizados exitosamente", "Correcto!", 1);
 
                     limpiar();
+                    JButton botonesH[] = {cmdBuscar, cmdCancelar};
+                    JButton botonesD[] = {cmdEliminar, cmdGuardar};
+                    JTextField cajaD[] = {txtNombre, txtPeso, txtPrecio, txtColor};
+                    JTextField cajaH[] = {txtRegistro};
+                    Helper.habilitarBotones(botonesH);
+                    Helper.deshabilitarBotones(botonesD);
+                    Helper.editarCajaDeTexto(cajaH);
+                    Helper.noEditarCajaTexto(cajaD);
+                    cmbGenero.setEnabled(false);
+                    cmbGenero.setSelectedItem(0);
 
                 }
             }
@@ -308,15 +321,10 @@ public class AgregarInstrumento extends javax.swing.JDialog {
             System.out.println(ex.getMessage());
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
+        } catch (Exception e) {
+            Helper.mensaje(this, "Por favor digite datos correctos", "Error", 2);
         }
-        JButton botonesH[] = {cmdBuscar, cmdCancelar};
-        JButton botonesD[] = {cmdEliminar, cmdGuardar};
-        JTextField cajaD[] = {txtNombre, txtPeso, txtPrecio, txtColor, txtGenero};
-        JTextField cajaH[] = {txtRegistro};
-        Helper.habilitarBotones(botonesH);
-        Helper.deshabilitarBotones(botonesD);
-        Helper.editarCajaDeTexto(cajaH);
-        Helper.noEditarCajaTexto(cajaD);
+
     }//GEN-LAST:event_cmdGuardarActionPerformed
 
     private void cmdEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEliminarActionPerformed
@@ -334,7 +342,7 @@ public class AgregarInstrumento extends javax.swing.JDialog {
                 Helper.VolcadoI(salida, instrumento);
                 Helper.LlenadoTablaI(tblTabla, ruta);
                 txtColor.setText("");
-                txtGenero.setText("");
+                cmbGenero.setSelectedItem(0);
                 txtNombre.setText("");
                 txtPeso.setText("");
                 txtPrecio.setText("");
@@ -351,6 +359,15 @@ public class AgregarInstrumento extends javax.swing.JDialog {
     private void cmdCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelarActionPerformed
         // TODO add your handling code here:
         limpiar();
+        JButton botonesH[] = {cmdBuscar, cmdCancelar};
+        JButton botonesD[] = {cmdEliminar, cmdGuardar};
+        JTextField cajaD[] = {txtNombre, txtPeso, txtPrecio, txtColor};
+        JTextField cajaH[] = {txtRegistro};
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
+        Helper.editarCajaDeTexto(cajaH);
+        Helper.noEditarCajaTexto(cajaD);
+        cmbGenero.setEnabled(false);
     }//GEN-LAST:event_cmdCancelarActionPerformed
 
     private void txtRegistroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRegistroKeyTyped
@@ -397,17 +414,6 @@ public class AgregarInstrumento extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtNombreKeyTyped
 
-    private void txtGeneroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGeneroKeyTyped
-        // TODO add your handling code here:
-        char c = evt.getKeyChar();
-
-        if (!Character.isAlphabetic(c)) {
-            getToolkit().beep();
-
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtGeneroKeyTyped
-
     private void txtColorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtColorKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
@@ -429,41 +435,57 @@ public class AgregarInstrumento extends javax.swing.JDialog {
 
         txtColor.setText(p.getColor());
         txtNombre.setText(p.getNombre());
-        txtGenero.setText(p.getGenero());
+        cmbGenero.setSelectedItem(p.getGenero());
         txtPeso.setText(p.getPeso());
         txtPrecio.setText(p.getPrecio());
-        txtRegistro.setText(p.getNumero_registro());
+        txtRegistro.setText(p.getIdentificacion());
         aux = 1;
     }//GEN-LAST:event_tblTablaMouseClicked
 
     private void cmdBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBuscarActionPerformed
 
         String registro = txtRegistro.getText();
-        if (Helper.buscarPorNoRegistro(registro, ruta)) {
-            Instrumento i = Helper.traerInstrumento(registro, ruta);
-            txtColor.setText(i.getColor());
-            txtNombre.setText(i.getNombre());
-            txtGenero.setText(i.getGenero());
-            txtPeso.setText(i.getPeso());
-            txtPrecio.setText(i.getPrecio());
-            txtRegistro.setText(i.getNumero_registro());
-            aux = 1;
-        } else {
+        if (txtRegistro.getText().trim().isEmpty()) {
+            Helper.mensaje(this, "Por favor no dejar campos vacios", "Revisar campos", 2);
             txtRegistro.requestFocusInWindow();
-            aux = 0;
+        } else {
+            if (Helper.buscarPorNoRegistro(registro, ruta)) {
+                Instrumento i = Helper.traerInstrumento(registro, ruta);
+                txtColor.setText(i.getColor());
+                txtNombre.setText(i.getNombre());
+                cmbGenero.setSelectedItem(i.getGenero());
+                txtPeso.setText(i.getPeso());
+                txtPrecio.setText(i.getPrecio());
+                txtRegistro.setText(i.getIdentificacion());
+                JButton botonesH[] = {cmdEliminar, cmdGuardar, cmdCancelar};
+                JButton botonesD[] = {cmdBuscar};
+                JTextField cajaH[] = {txtRegistro, txtNombre, txtPeso, txtPrecio, txtColor};
+                Helper.habilitarBotones(botonesH);
+                Helper.deshabilitarBotones(botonesD);
+                Helper.editarCajaDeTexto(cajaH);
+                cmbGenero.setEnabled(true);
+                aux = 1;
+
+            } else {
+                txtNombre.requestFocusInWindow();
+                JButton botonesH[] = {cmdGuardar, cmdCancelar};
+                JButton botonesD[] = {cmdBuscar, cmdEliminar};
+                JTextField cajaH[] = {txtRegistro, txtNombre, txtPeso, txtPrecio, txtColor};
+                Helper.habilitarBotones(botonesH);
+                Helper.deshabilitarBotones(botonesD);
+                Helper.editarCajaDeTexto(cajaH);
+                cmbGenero.setEnabled(true);
+                aux = 0;
+
+            }
+
         }
-        JButton botonesH[] = {cmdEliminar, cmdGuardar, cmdCancelar};
-        JButton botonesD[] = {cmdBuscar};
-        JTextField cajaH[] = {txtRegistro, txtNombre, txtPeso, txtPrecio, txtColor, txtGenero};
-        Helper.habilitarBotones(botonesH);
-        Helper.deshabilitarBotones(botonesD);
-        Helper.editarCajaDeTexto(cajaH);
     }//GEN-LAST:event_cmdBuscarActionPerformed
 
     public void limpiar() {
         txtNombre.setText("");
         txtColor.setText("");
-        txtGenero.setText("");
+        cmbGenero.setSelectedItem(0);
         txtPeso.setText("");
         txtPrecio.setText("");
         txtRegistro.setText("");
@@ -515,6 +537,7 @@ public class AgregarInstrumento extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cmbGenero;
     private javax.swing.JButton cmdBuscar;
     private javax.swing.JButton cmdCancelar;
     private javax.swing.JButton cmdEliminar;
@@ -534,7 +557,6 @@ public class AgregarInstrumento extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable tblTabla;
     private javax.swing.JTextField txtColor;
-    private javax.swing.JTextField txtGenero;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPeso;
     private javax.swing.JTextField txtPrecio;

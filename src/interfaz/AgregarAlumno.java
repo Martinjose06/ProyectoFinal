@@ -7,6 +7,7 @@ package interfaz;
 
 import clases.Alumno;
 import clases.Helper;
+import clases.Instrumento;
 import java.awt.TextField;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -28,7 +29,7 @@ public class AgregarAlumno extends javax.swing.JDialog {
     /**
      * Creates new form Agregar
      */
-    String ruta;
+    String rutaA, rutaI;
     ObjectOutputStream salida;
     ArrayList<Alumno> alumno;
     int aux = 0;
@@ -36,21 +37,29 @@ public class AgregarAlumno extends javax.swing.JDialog {
     public AgregarAlumno(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        ruta = "src/datos/alumnos.txt";
-        alumno = Helper.TraerDatos(ruta);
+        rutaA = "src/datos/alumnos.txt";
+        rutaI = "src/datos/instrumentos.txt";
+
+        alumno = Helper.TraerDatos(rutaA);
+
+        Helper.llenarComboIntrumento(cmbInstrumento, rutaI);
+
         try {
-            salida = new ObjectOutputStream(new FileOutputStream(ruta));
+            salida = new ObjectOutputStream(new FileOutputStream(rutaA));
             Helper.Volcado(salida, alumno);
             Helper.LimpiarTabla(tblTabla);
-            Helper.LlenadoTabla(tblTabla, ruta);
+            Helper.LlenadoTabla(tblTabla, rutaA);
             JButton botonesH[] = {cmdBuscar, cmdCancelar};
             JButton botonesD[] = {cmdEliminar, cmdGuardar};
-            JTextField cajaD[] = {txtNombre, txtPrimer_Apellido, txtSegundo_Apellido, txtClase, txtEdad};
+            JTextField cajaD[] = {txtNombre, txtPrimer_Apellido, txtSegundo_Apellido, txtEdad};
             JTextField cajaH[] = {txtIdentificacion};
             Helper.habilitarBotones(botonesH);
             Helper.deshabilitarBotones(botonesD);
             Helper.editarCajaDeTexto(cajaH);
             Helper.noEditarCajaTexto(cajaD);
+            cmbClase.setEnabled(false);
+            cmbSexo.setEnabled(false);
+            cmbInstrumento.setEnabled(false);
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -78,10 +87,12 @@ public class AgregarAlumno extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         txtEdad = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtClase = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtSegundo_Apellido = new javax.swing.JTextField();
         cmbSexo = new javax.swing.JComboBox<>();
+        cmbClase = new javax.swing.JComboBox<>();
+        cmbInstrumento = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         cmdGuardar = new javax.swing.JButton();
@@ -158,25 +169,28 @@ public class AgregarAlumno extends javax.swing.JDialog {
         jLabel6.setText("Clase");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, -1, -1));
 
-        txtClase.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        txtClase.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtClaseKeyTyped(evt);
-            }
-        });
-        jPanel2.add(txtClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 70, -1));
-
         jLabel8.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabel8.setText("Sexo");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
+        jLabel8.setText("Instrumento");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, -1, -1));
 
         txtSegundo_Apellido.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jPanel2.add(txtSegundo_Apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 70, -1));
 
+        cmbSexo.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         cmbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino", "Indefinido" }));
         jPanel2.add(cmbSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 120, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 380, 220));
+        cmbClase.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        cmbClase.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vallenato", "Folclor", "Salsa" }));
+        jPanel2.add(cmbClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 150, -1));
+
+        jPanel2.add(cmbInstrumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 150, -1));
+
+        jLabel9.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel9.setText("Sexo");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 590, 220));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 30, -1, 160));
@@ -222,7 +236,7 @@ public class AgregarAlumno extends javax.swing.JDialog {
         });
         jPanel4.add(cmdBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 90, -1));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 30, 110, 200));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 20, 110, 200));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informacion", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 12))); // NOI18N
         jPanel5.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
@@ -234,11 +248,11 @@ public class AgregarAlumno extends javax.swing.JDialog {
 
             },
             new String [] {
-                "No.", "Identificacion", "Nombre", "Primer Apellido", "Segundo Apellido", "Edad", "Clase", "Sexo"
+                "No.", "Identificacion", "Nombre", "Primer Apellido", "Segundo Apellido", "Edad", "Clase", "Instrumento", "Sexo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -253,67 +267,97 @@ public class AgregarAlumno extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tblTabla);
 
-        jPanel5.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 760, 200));
+        jPanel5.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 960, 200));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 780, 230));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 980, 230));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Grupo Folclorico.jpeg"))); // NOI18N
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -40, 880, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 1020, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 848, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        pack();
+        setSize(new java.awt.Dimension(1036, 539));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardarActionPerformed
 
         try {
-            String identificacion = null, nombre = null, primer_apellido = null, segundo_apellido = null, edad = null, clase = null, sexo = null;
+            String identificacion, nombre, primer_apellido, segundo_apellido, edad, clase, sexo, registro, auxInstrumento;
             ArrayList<Alumno> alumnoActualizado;
-            try {
+
+            if (txtIdentificacion.getText().isEmpty() || txtEdad.getText().isEmpty() || txtNombre.getText().isEmpty() || txtPrimer_Apellido.getText().isEmpty() || txtSegundo_Apellido.getText().isEmpty()) {
+                Helper.mensaje(this, "No puede dejar campos vacios", "Error", 2);
+                txtNombre.requestFocusInWindow();
+            } else {
+                int indice;
+
+                Instrumento instrumento;
+                auxInstrumento = cmbInstrumento.getSelectedItem().toString();
                 identificacion = txtIdentificacion.getText();
                 nombre = txtNombre.getText();
                 primer_apellido = txtPrimer_Apellido.getText();
                 segundo_apellido = txtSegundo_Apellido.getText();
                 edad = txtEdad.getText();
-                clase = txtClase.getText();
+                clase = cmbClase.getSelectedItem().toString();
                 sexo = cmbSexo.getSelectedItem().toString();
-
-            } catch (Exception e) {
-                Helper.mensaje(this, "Por favor digite datos correctos", "Error", 2);
-            }
-            if (txtIdentificacion.getText().isEmpty() || txtClase.getText().isEmpty() || txtEdad.getText().isEmpty() || txtNombre.getText().isEmpty() || txtPrimer_Apellido.getText().isEmpty() || txtSegundo_Apellido.getText().isEmpty()) {
-                Helper.mensaje(this, "No puede dejar campos vacios", "Error", 2);
-            } else {
+                indice = auxInstrumento.indexOf("-") - 1;
+                registro = auxInstrumento.substring(0, indice);
+                instrumento = Helper.traerInstrumento(registro, rutaI);
 
                 if (aux == 0) {
 
-                    Alumno a = new Alumno(identificacion, nombre, primer_apellido, segundo_apellido, edad, clase, sexo);
+                    Alumno a = new Alumno(identificacion, nombre, primer_apellido, segundo_apellido, edad, clase, sexo, instrumento);
 
                     a.guardar(salida);
                     txtNombre.requestFocusInWindow();
                     Helper.mensaje(this, "Datos guardados exitosamente", "Correcto!", 1);
-                    Helper.LlenadoTabla(tblTabla, ruta);
+                    Helper.LlenadoTabla(tblTabla, rutaA);
+                    cmbClase.setSelectedItem(0);
+                    cmbSexo.setSelectedItem(0);
+                    cmbInstrumento.setSelectedItem(0);
                     limpiar();
-                    
+                    JButton botonesH[] = {cmdBuscar, cmdCancelar};
+                    JButton botonesD[] = {cmdEliminar, cmdGuardar};
+                    JTextField cajaD[] = {txtNombre, txtPrimer_Apellido, txtSegundo_Apellido, txtEdad};
+                    JTextField cajaH[] = {txtIdentificacion};
+                    Helper.habilitarBotones(botonesH);
+                    Helper.deshabilitarBotones(botonesD);
+                    Helper.editarCajaDeTexto(cajaH);
+                    Helper.noEditarCajaTexto(cajaD);
+                    cmbClase.setEnabled(false);
+                    cmbSexo.setEnabled(false);
+                    cmbInstrumento.setEnabled(false);
 
                 } else {
-                    alumnoActualizado = Helper.actualizarAlumno(ruta, identificacion, nombre, primer_apellido, segundo_apellido, edad, clase, sexo);
-                    salida = new ObjectOutputStream(new FileOutputStream(ruta));
+                    alumnoActualizado = Helper.actualizarAlumno(rutaA, identificacion, nombre, primer_apellido, segundo_apellido, edad, clase, instrumento, sexo);
+                    salida = new ObjectOutputStream(new FileOutputStream(rutaA));
                     Helper.Volcado(salida, alumnoActualizado);
-                    Helper.LlenadoTabla(tblTabla, ruta);
+                    Helper.LlenadoTabla(tblTabla, rutaA);
                     Helper.mensaje(this, "Datos actualizados exitosamente", "Correcto!", 1);
+                    cmbClase.setSelectedItem(0);
+                    cmbSexo.setSelectedItem(0);
+                    cmbInstrumento.setSelectedItem(0);
+                    JButton botonesH[] = {cmdBuscar, cmdCancelar};
+                    JButton botonesD[] = {cmdEliminar, cmdGuardar};
+                    JTextField cajaD[] = {txtNombre, txtPrimer_Apellido, txtSegundo_Apellido, txtEdad};
+                    JTextField cajaH[] = {txtIdentificacion};
+                    Helper.habilitarBotones(botonesH);
+                    Helper.deshabilitarBotones(botonesD);
+                    Helper.editarCajaDeTexto(cajaH);
+                    Helper.noEditarCajaTexto(cajaD);
+                    cmbClase.setEnabled(false);
+                    cmbSexo.setEnabled(false);
+                    cmbInstrumento.setEnabled(false);
 
                     limpiar();
                 }
@@ -322,16 +366,13 @@ public class AgregarAlumno extends javax.swing.JDialog {
             System.out.println(ex.getMessage());
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
+        } catch (NullPointerException | NumberFormatException e) {
+            Helper.mensaje(this, "Por favor digite datos correctos", "Error", 2);
         }
-        JButton botonesH[] = {cmdBuscar, cmdCancelar};
-        JButton botonesD[] = {cmdEliminar, cmdGuardar};
-        JTextField cajaD[] = {txtNombre, txtPrimer_Apellido, txtSegundo_Apellido, txtClase, txtEdad};
-        JTextField cajaH[] = {txtIdentificacion};
-        Helper.habilitarBotones(botonesH);
-        Helper.deshabilitarBotones(botonesD);
-        Helper.editarCajaDeTexto(cajaH);
-        Helper.noEditarCajaTexto(cajaD);
 
+        cmbClase.setSelectedItem(0);
+        cmbSexo.setSelectedItem(0);
+        cmbInstrumento.setSelectedItem(0);
     }//GEN-LAST:event_cmdGuardarActionPerformed
 
     private void cmdEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEliminarActionPerformed
@@ -345,9 +386,9 @@ public class AgregarAlumno extends javax.swing.JDialog {
             try {
                 i = tblTabla.getSelectedRow();
                 alumno.remove(i);
-                salida = new ObjectOutputStream(new FileOutputStream(ruta));
+                salida = new ObjectOutputStream(new FileOutputStream(rutaA));
                 Helper.Volcado(salida, alumno);
-                Helper.LlenadoTabla(tblTabla, ruta);
+                Helper.LlenadoTabla(tblTabla, rutaA);
                 limpiar();
             } catch (FileNotFoundException ex) {
                 System.out.println(ex.getMessage());
@@ -379,17 +420,6 @@ public class AgregarAlumno extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtPrimer_ApellidoKeyTyped
 
-    private void txtClaseKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClaseKeyTyped
-        // TODO add your handling code here:
-        char c = evt.getKeyChar();
-
-        if (!Character.isAlphabetic(c)) {
-            getToolkit().beep();
-
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtClaseKeyTyped
-
     private void txtIdentificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdentificacionKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
@@ -416,52 +446,85 @@ public class AgregarAlumno extends javax.swing.JDialog {
         // TODO add your handling code here:
         Alumno p;
         int i;
-        alumno = Helper.TraerDatos(ruta);
+        alumno = Helper.TraerDatos(rutaA);
         i = tblTabla.getSelectedRow();
         p = alumno.get(i);
-
-        txtClase.setText(p.getClase());
+        cmbClase.setSelectedItem(p.getClase());
+        cmbInstrumento.setSelectedItem(p.getInstrumento());
+        cmbSexo.setSelectedItem(p.getSexo());
         txtNombre.setText(p.getNombre());
         txtIdentificacion.setText(p.getIdentificacion());
         txtEdad.setText(p.getEdad());
         txtPrimer_Apellido.setText(p.getPrimer_apellido());
         txtSegundo_Apellido.setText(p.getSegundo_apellido());
-        cmbSexo.setSelectedItem(p.getSexo());
+
         aux = 1;
     }//GEN-LAST:event_tblTablaMouseClicked
 
     private void cmdCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelarActionPerformed
         limpiar();
+        JButton botonesH[] = {cmdBuscar, cmdCancelar};
+        JButton botonesD[] = {cmdEliminar, cmdGuardar};
+        JTextField cajaD[] = {txtNombre, txtPrimer_Apellido, txtSegundo_Apellido, txtEdad};
+        JTextField cajaH[] = {txtIdentificacion};
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
+        Helper.editarCajaDeTexto(cajaH);
+        Helper.noEditarCajaTexto(cajaD);
+        cmbClase.setEnabled(false);
+        cmbSexo.setEnabled(false);
+        cmbInstrumento.setEnabled(false);
+
     }//GEN-LAST:event_cmdCancelarActionPerformed
 
     private void cmdBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBuscarActionPerformed
 
         String identificacion = txtIdentificacion.getText();
-        if (Helper.buscarPorIdentificacion(identificacion, ruta)) {
-            Alumno a = Helper.traerAlumno(identificacion, ruta);
-            txtClase.setText(a.getClase());
-            txtNombre.setText(a.getNombre());
-            txtIdentificacion.setText(a.getIdentificacion());
-            txtEdad.setText(a.getEdad());
-            txtPrimer_Apellido.setText(a.getPrimer_apellido());
-            txtSegundo_Apellido.setText(a.getSegundo_apellido());
-            cmbSexo.setSelectedItem(a.getSexo());
-            aux = 1;
-        } else {
+        Instrumento i;
+        if (txtIdentificacion.getText().trim().isEmpty()) {
+            Helper.mensaje(this, "Por favor no dejar campos vacios", "Revisar campos", 2);
             txtIdentificacion.requestFocusInWindow();
-            aux = 0;
+        } else {
+            if (Helper.buscarPorIdentificacion(identificacion, rutaA)) {
+                Alumno a = Helper.traerAlumno(identificacion, rutaA);
+                i = a.getInstrumento();
+                cmbInstrumento.setSelectedItem(a.getNombre());
+                txtNombre.setText(a.getNombre());
+                txtIdentificacion.setText(a.getIdentificacion());
+                txtEdad.setText(a.getEdad());
+                txtPrimer_Apellido.setText(a.getPrimer_apellido());
+                txtSegundo_Apellido.setText(a.getSegundo_apellido());
+                cmbSexo.setSelectedItem(a.getSexo());
+                aux = 1;
+                JButton botonesH[] = {cmdEliminar, cmdGuardar, cmdCancelar};
+                JButton botonesD[] = {cmdBuscar};
+                JTextField cajaH[] = {txtIdentificacion, txtNombre, txtPrimer_Apellido, txtSegundo_Apellido, txtEdad};
+                Helper.habilitarBotones(botonesH);
+                Helper.deshabilitarBotones(botonesD);
+                Helper.editarCajaDeTexto(cajaH);
+                cmbClase.setEnabled(true);
+                cmbSexo.setEnabled(true);
+                cmbInstrumento.setEnabled(true);
+            } else {
+                txtNombre.requestFocusInWindow();
+                JButton botonesH[] = {cmdGuardar, cmdCancelar};
+                JButton botonesD[] = {cmdBuscar, cmdEliminar};
+                JTextField cajaH[] = {txtIdentificacion, txtNombre, txtPrimer_Apellido, txtSegundo_Apellido, txtEdad};
+                Helper.habilitarBotones(botonesH);
+                Helper.deshabilitarBotones(botonesD);
+                Helper.editarCajaDeTexto(cajaH);
+                cmbClase.setEnabled(true);
+                cmbSexo.setEnabled(true);
+                cmbInstrumento.setEnabled(true);
+                aux = 0;
+            }
+
         }
-        JButton botonesH[] = {cmdEliminar, cmdGuardar, cmdCancelar};
-        JButton botonesD[] = {cmdBuscar};
-        JTextField cajaH[] = {txtIdentificacion, txtNombre, txtPrimer_Apellido, txtSegundo_Apellido, txtClase, txtEdad};
-        Helper.habilitarBotones(botonesH);
-        Helper.deshabilitarBotones(botonesD);
-        Helper.editarCajaDeTexto(cajaH);
     }//GEN-LAST:event_cmdBuscarActionPerformed
 
     public void limpiar() {
         txtIdentificacion.setText("");
-        txtClase.setText("");
+        cmbClase.setSelectedItem(0);
         txtEdad.setText("");
         txtNombre.setText("");
         txtPrimer_Apellido.setText("");
@@ -516,6 +579,8 @@ public class AgregarAlumno extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cmbClase;
+    private javax.swing.JComboBox<String> cmbInstrumento;
     private javax.swing.JComboBox<String> cmbSexo;
     private javax.swing.JButton cmdBuscar;
     private javax.swing.JButton cmdCancelar;
@@ -529,6 +594,7 @@ public class AgregarAlumno extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -537,7 +603,6 @@ public class AgregarAlumno extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable tblTabla;
-    private javax.swing.JTextField txtClase;
     private javax.swing.JTextField txtEdad;
     private javax.swing.JTextField txtIdentificacion;
     private javax.swing.JTextField txtNombre;

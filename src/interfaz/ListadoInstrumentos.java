@@ -51,7 +51,7 @@ public class ListadoInstrumentos extends javax.swing.JDialog {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmbListado.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        cmbListado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Folclór", "Vallenato", "Salsa" }));
+        cmbListado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Folclor", "Vallenato", "Salsa", "General" }));
         cmbListado.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbListadoItemStateChanged(evt);

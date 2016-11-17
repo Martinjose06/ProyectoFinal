@@ -13,7 +13,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import javafx.scene.control.TextField;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -93,7 +95,8 @@ public class Helper {
             tm.setValueAt(alumno.get(i).getSegundo_apellido(), i, 4);
             tm.setValueAt(alumno.get(i).getEdad(), i, 5);
             tm.setValueAt(alumno.get(i).getClase(), i, 6);
-            tm.setValueAt(alumno.get(i).getSexo(), i, 7);
+            tm.setValueAt(alumno.get(i).getInstrumento().getNombre(), i, 7);
+            tm.setValueAt(alumno.get(i).getSexo(), i, 8);
         }
     }
 
@@ -112,7 +115,8 @@ public class Helper {
             tm.setValueAt(alumno.get(i).getSegundo_apellido(), i, 4);
             tm.setValueAt(alumno.get(i).getEdad(), i, 5);
             tm.setValueAt(alumno.get(i).getClase(), i, 6);
-            tm.setValueAt(alumno.get(i).getSexo(), i, 7);
+            tm.setValueAt(alumno.get(i).getInstrumento().getNombre(), i, 7);
+            tm.setValueAt(alumno.get(i).getSexo(), i, 8);
         }
     }
 
@@ -126,12 +130,12 @@ public class Helper {
         LimpiarTabla(tabla);
         for (int i = 0; i < nf; i++) {
             tm.setValueAt(i + 1, i, 0);
-            tm.setValueAt(instrumento.get(i).getNumero_registro(), i, 1);
+            tm.setValueAt(instrumento.get(i).getIdentificacion(), i, 1);
             tm.setValueAt(instrumento.get(i).getNombre(), i, 2);
             tm.setValueAt(instrumento.get(i).getGenero(), i, 3);
-            tm.setValueAt(instrumento.get(i).getPrecio(), i, 4);
+            tm.setValueAt("$"+instrumento.get(i).getPrecio(), i, 4);
             tm.setValueAt(instrumento.get(i).getColor(), i, 5);
-            tm.setValueAt(instrumento.get(i).getPeso(), i, 6);
+            tm.setValueAt(instrumento.get(i).getPeso()+" kg", i, 6);
         }
     }
 
@@ -258,7 +262,7 @@ public class Helper {
     public static boolean buscarPorNoRegistro(String numero_registro, String ruta) {
         ArrayList<Instrumento> instrumento = TraerDatosI(ruta);
         for (int i = 0; i < instrumento.size(); i++) {
-            if (instrumento.get(i).getNumero_registro().equals(numero_registro)) {
+            if (instrumento.get(i).getIdentificacion().equals(numero_registro)) {
                 return true;
             }
 
@@ -280,7 +284,7 @@ public class Helper {
     public static Instrumento traerInstrumento(String numero_registro, String ruta) {
         ArrayList<Instrumento> instrumento = TraerDatosI(ruta);
         for (int i = 0; i < instrumento.size(); i++) {
-            if (instrumento.get(i).getNumero_registro().equals(numero_registro)) {
+            if (instrumento.get(i).getIdentificacion().equals(numero_registro)) {
                 return instrumento.get(i);
             }
 
@@ -288,7 +292,7 @@ public class Helper {
         return null;
     }
 
-    public static ArrayList<Alumno> actualizarAlumno(String ruta, String identificacion, String nombre, String primer_apellido, String segundo_apellido, String edad, String clase, String sexo) {
+    public static ArrayList<Alumno> actualizarAlumno(String ruta, String identificacion, String nombre, String primer_apellido, String segundo_apellido, String edad, String clase, Instrumento instrumento, String sexo) {
         ArrayList<Alumno> alumnos = TraerDatos(ruta);
         for (int i = 0; i < alumnos.size(); i++) {
             if (alumnos.get(i).getIdentificacion().equals(identificacion)) {
@@ -297,6 +301,7 @@ public class Helper {
                 alumnos.get(i).setSegundo_apellido(segundo_apellido);
                 alumnos.get(i).setEdad(edad);
                 alumnos.get(i).setClase(clase);
+                alumnos.get(i).setInstrumento(instrumento);
                 alumnos.get(i).setSexo(sexo);
 
                 i = alumnos.size();
@@ -308,7 +313,7 @@ public class Helper {
     public static ArrayList<Instrumento> actualizarInstrumento(String ruta, String nombre, String genero, String peso, String color, String precio, String numero_registro) {
         ArrayList<Instrumento> instrumento = TraerDatosI(ruta);
         for (int i = 0; i < instrumento.size(); i++) {
-            if (instrumento.get(i).getNumero_registro().equals(numero_registro)) {
+            if (instrumento.get(i).getIdentificacion().equals(numero_registro)) {
                 instrumento.get(i).setNombre(nombre);
                 instrumento.get(i).setGenero(genero);
                 instrumento.get(i).setPeso(peso);
@@ -321,6 +326,16 @@ public class Helper {
         return instrumento;
     }
 
-    
+    public static void llenarComboIntrumento(JComboBox combo, String ruta) {
+        ArrayList<Instrumento> instrumento = TraerDatos(ruta);
+        DefaultComboBoxModel dcbm = (DefaultComboBoxModel) combo.getModel();
+        dcbm.removeAllElements();
+        Instrumento a;
+        for (int i = 0; i < instrumento.size(); i++) {
+            a = instrumento.get(i);
+            dcbm.addElement(a.getIdentificacion()+" - "+a.getNombre());
+        }
+
+    }
 
 }

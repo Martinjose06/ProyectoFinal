@@ -12,30 +12,26 @@ import java.io.ObjectOutputStream;
  *
  * @author LUCYLEONOR
  */
-public class Instrumento implements java.io.Serializable{
-    private String nombre;
+public class Instrumento extends Generalidad implements java.io.Serializable{
     private String genero;
     private String peso;
     private String color;
     private String precio;
-    private String numero_registro;
+    private String identificacion;
+    private String nombre;
+    
+    
 
-    public Instrumento(String nombre, String genero, String peso, String color, String precio, String numero_registro) {
-        this.nombre = nombre;
+    public Instrumento(String nombre, String genero, String peso, String color, String precio,String identificacion) {
+        super(identificacion,nombre);
         this.genero = genero;
         this.peso = peso;
         this.color = color;
         this.precio = precio;
-        this.numero_registro = numero_registro;
+        
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+  
 
     public String getGenero() {
         return genero;
@@ -69,13 +65,7 @@ public class Instrumento implements java.io.Serializable{
         this.precio = precio;
     }
 
-    public String getNumero_registro() {
-        return numero_registro;
-    }
-
-    public void setNumero_registro(String numero_registro) {
-        this.numero_registro = numero_registro;
-    }
+   
     
     public void guardar(ObjectOutputStream salida) throws IOException{
         salida.writeObject(this);
