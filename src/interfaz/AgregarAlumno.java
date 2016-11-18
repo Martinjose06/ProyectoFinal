@@ -260,6 +260,7 @@ public class AgregarAlumno extends javax.swing.JDialog {
             }
         });
         tblTabla.setToolTipText("");
+        tblTabla.getTableHeader().setReorderingAllowed(false);
         tblTabla.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblTablaMouseClicked(evt);
@@ -301,18 +302,23 @@ public class AgregarAlumno extends javax.swing.JDialog {
             } else if (!Helper.soloNumeros(txtEdad.getText().trim())) {
                 Helper.mensaje(this, "Solo puede ingresar numeros", "Error", 2);
                 txtEdad.requestFocusInWindow();
+                txtEdad.selectAll();
             } else if (!Helper.soloNumeros(txtIdentificacion.getText().trim())) {
                 Helper.mensaje(this, "Solo puede ingresar numeros", "Error", 2);
                 txtIdentificacion.requestFocusInWindow();
-            } else if (!Helper.soloLetras(txtNombre.getText().trim())) {
+                txtIdentificacion.selectAll();
+            } else if (Helper.soloLetras(txtNombre.getText().trim())) {
                 Helper.mensaje(this, "Solo puede ingresar letras", "Error", 2);
                 txtNombre.requestFocusInWindow();
-            } else if (!Helper.soloLetras(txtPrimer_Apellido.getText().trim())) {
+                txtNombre.selectAll();
+            } else if (Helper.soloLetras(txtPrimer_Apellido.getText().trim())) {
                 Helper.mensaje(this, "Solo puede ingresar letras", "Error", 2);
                 txtPrimer_Apellido.requestFocusInWindow();
-            } else if (!Helper.soloLetras(txtSegundo_Apellido.getText().trim())) {
+                txtPrimer_Apellido.selectAll();
+            } else if (Helper.soloLetras(txtSegundo_Apellido.getText().trim())) {
                 Helper.mensaje(this, "Solo puede ingresar letras", "Error", 2);
                 txtSegundo_Apellido.requestFocusInWindow();
+                txtSegundo_Apellido.selectAll();
             } else {
                 int indice;
 
@@ -404,6 +410,17 @@ public class AgregarAlumno extends javax.swing.JDialog {
                 salida = new ObjectOutputStream(new FileOutputStream(rutaA));
                 Helper.Volcado(salida, alumno);
                 Helper.LlenadoTabla(tblTabla, rutaA);
+                JButton botonesH[] = {cmdBuscar, cmdCancelar};
+                JButton botonesD[] = {cmdEliminar, cmdGuardar};
+                JTextField cajaD[] = {txtNombre, txtPrimer_Apellido, txtSegundo_Apellido, txtEdad};
+                JTextField cajaH[] = {txtIdentificacion};
+                Helper.habilitarBotones(botonesH);
+                Helper.deshabilitarBotones(botonesD);
+                Helper.editarCajaDeTexto(cajaH);
+                Helper.noEditarCajaTexto(cajaD);
+                cmbClase.setEnabled(false);
+                cmbSexo.setEnabled(false);
+                cmbInstrumento.setEnabled(false);
                 limpiar();
             } catch (FileNotFoundException ex) {
                 System.out.println(ex.getMessage());
@@ -472,7 +489,15 @@ public class AgregarAlumno extends javax.swing.JDialog {
         txtEdad.setText(p.getEdad());
         txtPrimer_Apellido.setText(p.getPrimer_apellido());
         txtSegundo_Apellido.setText(p.getSegundo_apellido());
-
+        JButton botonesH[] = {cmdEliminar, cmdGuardar, cmdCancelar};
+        JButton botonesD[] = {cmdBuscar};
+        JTextField cajaH[] = {txtIdentificacion, txtNombre, txtPrimer_Apellido, txtSegundo_Apellido, txtEdad};
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
+        Helper.editarCajaDeTexto(cajaH);
+        cmbClase.setEnabled(true);
+        cmbSexo.setEnabled(true);
+        cmbInstrumento.setEnabled(true);
         aux = 1;
     }//GEN-LAST:event_tblTablaMouseClicked
 

@@ -234,6 +234,7 @@ public class AgregarInstrumento extends javax.swing.JDialog {
             }
         });
         tblTabla.setToolTipText("");
+        tblTabla.getTableHeader().setReorderingAllowed(false);
         tblTabla.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblTablaMouseClicked(evt);
@@ -263,15 +264,27 @@ public class AgregarInstrumento extends javax.swing.JDialog {
             if (txtColor.getText().isEmpty() || txtNombre.getText().isEmpty() || txtPeso.getText().isEmpty() || txtPrecio.getText().isEmpty() || txtRegistro.getText().isEmpty()) {
                 Helper.mensaje(this, "No puede dejar campos vacios", "Error", 2);
                 txtNombre.requestFocusInWindow();
+                txtNombre.selectAll();
             } else if (!Helper.soloNumeros(txtPeso.getText().trim())) {
                 Helper.mensaje(this, "Solo puede ingresar numeros", "Error", 2);
                 txtPeso.requestFocusInWindow();
+                txtPeso.selectAll();
             } else if (!Helper.soloNumeros(txtRegistro.getText().trim())) {
                 Helper.mensaje(this, "Solo puede ingresar numeros", "Error", 2);
                 txtRegistro.requestFocusInWindow();
+                txtRegistro.selectAll();
             } else if (!Helper.soloNumeros(txtPrecio.getText().trim())) {
                 Helper.mensaje(this, "Solo puede ingresar numeros", "Error", 2);
                 txtPrecio.requestFocusInWindow();
+                txtPrecio.selectAll();
+            } else if (Helper.soloLetras(txtNombre.getText().trim())) {
+                Helper.mensaje(this, "Solo puede ingresar letras", "Error", 2);
+                txtNombre.requestFocusInWindow();
+                txtNombre.selectAll();
+            } else if (Helper.soloLetras(txtColor.getText().trim())) {
+                Helper.mensaje(this, "Solo puede ingresar letras", "Error", 2);
+                txtColor.requestFocusInWindow();
+                txtColor.selectAll();
             } else {
                 nombre = txtNombre.getText();
                 genero = cmbGenero.getSelectedItem().toString();
@@ -350,13 +363,17 @@ public class AgregarInstrumento extends javax.swing.JDialog {
                 salida = new ObjectOutputStream(new FileOutputStream(ruta));
                 Helper.VolcadoI(salida, instrumento);
                 Helper.LlenadoTablaI(tblTabla, ruta);
-                txtColor.setText("");
-                cmbGenero.setSelectedItem(0);
-                txtNombre.setText("");
-                txtPeso.setText("");
-                txtPrecio.setText("");
-                txtRegistro.setText("");
+                limpiar();
                 txtRegistro.requestFocusInWindow();
+                JButton botonesH[] = {cmdBuscar, cmdCancelar};
+                JButton botonesD[] = {cmdEliminar, cmdGuardar};
+                JTextField cajaD[] = {txtNombre, txtPeso, txtPrecio, txtColor};
+                JTextField cajaH[] = {txtRegistro};
+                Helper.habilitarBotones(botonesH);
+                Helper.deshabilitarBotones(botonesD);
+                Helper.editarCajaDeTexto(cajaH);
+                Helper.noEditarCajaTexto(cajaD);
+                cmbGenero.setEnabled(false);
             } catch (FileNotFoundException ex) {
                 System.out.println(ex.getMessage());
             } catch (IOException ex) {
@@ -448,6 +465,13 @@ public class AgregarInstrumento extends javax.swing.JDialog {
         txtPeso.setText(p.getPeso());
         txtPrecio.setText(p.getPrecio());
         txtRegistro.setText(p.getIdentificacion());
+        JButton botonesH[] = {cmdEliminar, cmdGuardar, cmdCancelar};
+        JButton botonesD[] = {cmdBuscar};
+        JTextField cajaH[] = {txtRegistro, txtNombre, txtPeso, txtPrecio, txtColor};
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
+        Helper.editarCajaDeTexto(cajaH);
+        cmbGenero.setEnabled(true);
         aux = 1;
     }//GEN-LAST:event_tblTablaMouseClicked
 

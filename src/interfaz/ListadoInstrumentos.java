@@ -90,6 +90,7 @@ public class ListadoInstrumentos extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        tblTabla.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tblTabla);
 
         jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 350, 150));

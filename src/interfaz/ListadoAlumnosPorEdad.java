@@ -91,6 +91,7 @@ public class ListadoAlumnosPorEdad extends javax.swing.JDialog {
             }
         });
         tblTabla.setToolTipText("");
+        tblTabla.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblTabla);
 
         jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 430, 200));
