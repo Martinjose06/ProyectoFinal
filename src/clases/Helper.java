@@ -110,13 +110,36 @@ public class Helper {
         for (int i = 0; i < nf; i++) {
             tm.setValueAt(i + 1, i, 0);
             tm.setValueAt(alumno.get(i).getIdentificacion(), i, 1);
+            tm.setValueAt(alumno.get(i).getClase(), i, 2);
+        }
+    }
+    
+    public static void LlenadoTabla1(JTable tabla, ArrayList<Alumno> alumno) {
+        int nf;
+        DefaultTableModel tm;
+        tm = (DefaultTableModel) tabla.getModel();
+        nf = alumno.size();
+        tm.setRowCount(nf);
+        LimpiarTabla(tabla);
+        for (int i = 0; i < nf; i++) {
+            tm.setValueAt(i + 1, i, 0);
+            tm.setValueAt(alumno.get(i).getIdentificacion(), i, 1);
+            tm.setValueAt(alumno.get(i).getSexo(), i, 2);
+        }
+    }
+    
+       public static void LlenadoTabla2(JTable tabla, ArrayList<Alumno> alumno) {
+        int nf;
+        DefaultTableModel tm;
+        tm = (DefaultTableModel) tabla.getModel();
+        nf = alumno.size();
+        tm.setRowCount(nf);
+        LimpiarTabla(tabla);
+        for (int i = 0; i < nf; i++) {
+            tm.setValueAt(i + 1, i, 0);
+            tm.setValueAt(alumno.get(i).getIdentificacion(), i, 1);
             tm.setValueAt(alumno.get(i).getNombre(), i, 2);
-            tm.setValueAt(alumno.get(i).getPrimer_apellido(), i, 3);
-            tm.setValueAt(alumno.get(i).getSegundo_apellido(), i, 4);
-            tm.setValueAt(alumno.get(i).getEdad(), i, 5);
-            tm.setValueAt(alumno.get(i).getClase(), i, 6);
-            tm.setValueAt(alumno.get(i).getInstrumento().getNombre(), i, 7);
-            tm.setValueAt(alumno.get(i).getSexo(), i, 8);
+            tm.setValueAt(alumno.get(i).getEdad(), i, 3);
         }
     }
 
@@ -133,9 +156,9 @@ public class Helper {
             tm.setValueAt(instrumento.get(i).getIdentificacion(), i, 1);
             tm.setValueAt(instrumento.get(i).getNombre(), i, 2);
             tm.setValueAt(instrumento.get(i).getGenero(), i, 3);
-            tm.setValueAt("$"+instrumento.get(i).getPrecio(), i, 4);
+            tm.setValueAt("$" + instrumento.get(i).getPrecio(), i, 4);
             tm.setValueAt(instrumento.get(i).getColor(), i, 5);
-            tm.setValueAt(instrumento.get(i).getPeso()+" kg", i, 6);
+            tm.setValueAt(instrumento.get(i).getPeso() + " kg", i, 6);
         }
     }
 
@@ -226,6 +249,17 @@ public class Helper {
         LlenadoTablaI(tabla, instrumentosFiltrados);
     }
 
+    public static void ListadoInstrumentoPorNombre(JTable tabla, String ruta, String nombre) {
+        ArrayList<Instrumento> instrumentos = TraerDatosI(ruta);
+        ArrayList<Instrumento> instrumentosFiltrados = new ArrayList();
+        for (int i = 0; i < instrumentos.size(); i++) {
+            if (instrumentos.get(i).getNombre().equals(nombre)) {
+                instrumentosFiltrados.add(instrumentos.get(i));
+            }
+        }
+        LlenadoTablaI(tabla, instrumentosFiltrados);
+    }
+
     public static void ListadoAlumnoPorSexo(JTable tabla, String ruta, String sexo) {
         ArrayList<Alumno> alumnos = TraerDatos(ruta);
         ArrayList<Alumno> alumnosFiltrados = new ArrayList();
@@ -234,7 +268,7 @@ public class Helper {
                 alumnosFiltrados.add(alumnos.get(i));
             }
         }
-        LlenadoTabla(tabla, alumnosFiltrados);
+        LlenadoTabla1(tabla, alumnosFiltrados);
     }
 
     public static void ListadoAlumnoPorClase(JTable tabla, String ruta, String clase) {
@@ -246,6 +280,17 @@ public class Helper {
             }
         }
         LlenadoTabla(tabla, alumnosFiltrados);
+    }
+    
+       public static void ListadoAlumnoPorEdad(JTable tabla, String ruta, String edad) {
+        ArrayList<Alumno> alumnos = TraerDatos(ruta);
+        ArrayList<Alumno> alumnosFiltrados = new ArrayList();
+        for (int i = 0; i < alumnos.size(); i++) {
+            if (alumnos.get(i).getEdad().equals(edad)) {
+                alumnosFiltrados.add(alumnos.get(i));
+            }
+        }
+        LlenadoTabla2(tabla, alumnosFiltrados);
     }
 
     public static boolean buscarPorIdentificacion(String identificacion, String ruta) {
@@ -333,7 +378,7 @@ public class Helper {
         Instrumento a;
         for (int i = 0; i < instrumento.size(); i++) {
             a = instrumento.get(i);
-            dcbm.addElement(a.getIdentificacion()+" - "+a.getNombre());
+            dcbm.addElement(a.getIdentificacion() + " - " + a.getNombre());
         }
 
     }

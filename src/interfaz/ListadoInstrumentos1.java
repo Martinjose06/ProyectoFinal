@@ -11,14 +11,14 @@ import clases.Helper;
  *
  * @author w8
  */
-public class ListadoInstrumentos extends javax.swing.JDialog {
+public class ListadoInstrumentos1 extends javax.swing.JDialog {
 
     /**
      * Creates new form ListadoInstrumentos
      */
     String ruta;
 
-    public ListadoInstrumentos(java.awt.Frame parent, boolean modal) {
+    public ListadoInstrumentos1(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         ruta = "src/datos/instrumentos.txt";
@@ -51,7 +51,7 @@ public class ListadoInstrumentos extends javax.swing.JDialog {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmbListado.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        cmbListado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Folclor", "Vallenato", "Salsa", "General" }));
+        cmbListado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acordeon", "Folclor", "Caja - Vallenata", "Guitarra", "Guacharaca", "Timbal", "Conga", "Bateria", "Piano", "Bajo", "Trompeta", "Saxofón" }));
         jPanel2.add(cmbListado, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 160, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 220, 80));
@@ -79,11 +79,11 @@ public class ListadoInstrumentos extends javax.swing.JDialog {
 
             },
             new String [] {
-                "No.", "Genero", "Nombre"
+                "No.", "Nombre"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -117,7 +117,7 @@ public class ListadoInstrumentos extends javax.swing.JDialog {
     private void cmdListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdListarActionPerformed
         // TODO add your handling code here:
         String opcion = cmbListado.getSelectedItem().toString();
-        Helper.ListadoInstrumentoPorGenero(tblTabla, ruta, opcion);
+        Helper.ListadoInstrumentoPorNombre(tblTabla, ruta, opcion);
     }//GEN-LAST:event_cmdListarActionPerformed
 
     /**
@@ -137,20 +137,21 @@ public class ListadoInstrumentos extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListadoInstrumentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListadoInstrumentos1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListadoInstrumentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListadoInstrumentos1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListadoInstrumentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListadoInstrumentos1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListadoInstrumentos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListadoInstrumentos1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ListadoInstrumentos dialog = new ListadoInstrumentos(new javax.swing.JFrame(), true);
+                ListadoInstrumentos1 dialog = new ListadoInstrumentos1(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

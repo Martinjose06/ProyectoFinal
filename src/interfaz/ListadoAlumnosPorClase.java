@@ -51,15 +51,10 @@ public class ListadoAlumnosPorClase extends javax.swing.JDialog {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmbListado.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        cmbListado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acordeon", "Folclor", "CajaVallenata", "Guitarra", "Guacharaca", "Timbal", "Conga", "Bateria", "Piano", "Bajo", "Canto", "Trompeta", "Saxofón" }));
-        cmbListado.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbListadoItemStateChanged(evt);
-            }
-        });
+        cmbListado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acordeon", "Folclor", "Caja - Vallenata", "Guitarra", "Guacharaca", "Timbal", "Conga", "Bateria", "Piano", "Bajo", "Canto", "Trompeta", "Saxofón" }));
         jPanel2.add(cmbListado, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 160, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 220, 80));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 220, 80));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 12))); // NOI18N
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -73,9 +68,9 @@ public class ListadoAlumnosPorClase extends javax.swing.JDialog {
         });
         jPanel3.add(cmdListar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 80, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, 100, 80));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, 100, 80));
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Instrumentos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 12))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Estudiantes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 12))); // NOI18N
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblTabla.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
@@ -84,11 +79,11 @@ public class ListadoAlumnosPorClase extends javax.swing.JDialog {
 
             },
             new String [] {
-                "No.", "Identificacion", "Nombre", "Primer Apellido", "Segundo Apellido", "Edad", "Clase", "Sexo"
+                "No.", "Identificacion", "Clase"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -98,12 +93,12 @@ public class ListadoAlumnosPorClase extends javax.swing.JDialog {
         tblTabla.setToolTipText("");
         jScrollPane1.setViewportView(tblTabla);
 
-        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 800, 200));
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 510, 200));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 820, 250));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 550, 250));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Grupo Folclorico.jpeg"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,20 +113,14 @@ public class ListadoAlumnosPorClase extends javax.swing.JDialog {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(840, 494));
+        setSize(new java.awt.Dimension(642, 494));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdListarActionPerformed
         String opcion = cmbListado.getSelectedItem().toString();
         Helper.ListadoAlumnoPorClase(tblTabla, ruta, opcion);
-
     }//GEN-LAST:event_cmdListarActionPerformed
-
-    private void cmbListadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbListadoItemStateChanged
-        String opcion = cmbListado.getSelectedItem().toString();
-        Helper.ListadoAlumnoPorClase(tblTabla, ruta, opcion);
-    }//GEN-LAST:event_cmbListadoItemStateChanged
 
     /**
      * @param args the command line arguments

@@ -5,6 +5,8 @@
  */
 package interfaz;
 
+import clases.Helper;
+
 /**
  *
  * @author w8
@@ -17,7 +19,7 @@ public class ReporteInstrumentos extends javax.swing.JDialog {
     public ReporteInstrumentos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        jRadioButton3.setSelected(true);
+        RdbGenero.setSelected(true);
     }
 
     /**
@@ -32,10 +34,8 @@ public class ReporteInstrumentos extends javax.swing.JDialog {
         grupoReportes = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
+        RdbGenero = new javax.swing.JRadioButton();
+        RdbNombre = new javax.swing.JRadioButton();
         jPanel3 = new javax.swing.JPanel();
         cmdConfirmar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -49,27 +49,17 @@ public class ReporteInstrumentos extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Reportes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 12))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        grupoReportes.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jRadioButton2.setText("Sexo");
-        jPanel2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
+        grupoReportes.add(RdbGenero);
+        RdbGenero.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        RdbGenero.setText("Genero");
+        jPanel2.add(RdbGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
-        grupoReportes.add(jRadioButton3);
-        jRadioButton3.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jRadioButton3.setText("Genero");
-        jPanel2.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+        grupoReportes.add(RdbNombre);
+        RdbNombre.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        RdbNombre.setText("Nombre");
+        jPanel2.add(RdbNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
-        grupoReportes.add(jRadioButton4);
-        jRadioButton4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jRadioButton4.setText("Sexo");
-        jPanel2.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
-
-        grupoReportes.add(jRadioButton5);
-        jRadioButton5.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jRadioButton5.setText("Sexo");
-        jPanel2.add(jRadioButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 150, 160));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 150, 100));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Boton", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 12))); // NOI18N
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -83,16 +73,16 @@ public class ReporteInstrumentos extends javax.swing.JDialog {
         });
         jPanel3.add(cmdConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 140, 60));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 130, 60));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Instrumentos.jpeg"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 210));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 210));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,9 +95,14 @@ public class ReporteInstrumentos extends javax.swing.JDialog {
 
     private void cmdConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdConfirmarActionPerformed
         // TODO add your handling code here:
-        if (jRadioButton3.isSelected()) {
+        if (RdbGenero.isSelected()) {
             ListadoInstrumentos i = new ListadoInstrumentos(null, true);
             i.setVisible(true);
+        } else if (RdbNombre.isSelected()) {
+            ListadoInstrumentos1 i = new ListadoInstrumentos1(null, true);
+            i.setVisible(true);
+        } else {
+            Helper.mensaje(this, "Por favor seleccione una de las opciones", "Error", 2);
         }
     }//GEN-LAST:event_cmdConfirmarActionPerformed
 
@@ -155,15 +150,13 @@ public class ReporteInstrumentos extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton RdbGenero;
+    private javax.swing.JRadioButton RdbNombre;
     private javax.swing.JButton cmdConfirmar;
     private javax.swing.ButtonGroup grupoReportes;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
     // End of variables declaration//GEN-END:variables
 }
