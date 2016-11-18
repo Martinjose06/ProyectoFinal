@@ -263,6 +263,15 @@ public class AgregarInstrumento extends javax.swing.JDialog {
             if (txtColor.getText().isEmpty() || txtNombre.getText().isEmpty() || txtPeso.getText().isEmpty() || txtPrecio.getText().isEmpty() || txtRegistro.getText().isEmpty()) {
                 Helper.mensaje(this, "No puede dejar campos vacios", "Error", 2);
                 txtNombre.requestFocusInWindow();
+            } else if (!Helper.soloNumeros(txtPeso.getText().trim())) {
+                Helper.mensaje(this, "Solo puede ingresar numeros", "Error", 2);
+                txtPeso.requestFocusInWindow();
+            } else if (!Helper.soloNumeros(txtRegistro.getText().trim())) {
+                Helper.mensaje(this, "Solo puede ingresar numeros", "Error", 2);
+                txtRegistro.requestFocusInWindow();
+            } else if (!Helper.soloNumeros(txtPrecio.getText().trim())) {
+                Helper.mensaje(this, "Solo puede ingresar numeros", "Error", 2);
+                txtPrecio.requestFocusInWindow();
             } else {
                 nombre = txtNombre.getText();
                 genero = cmbGenero.getSelectedItem().toString();

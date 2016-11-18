@@ -80,7 +80,7 @@ public class PrincipalVisitante extends javax.swing.JFrame {
 
         mnReportes1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         mnReportes1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Instrumentow.png"))); // NOI18N
-        mnReportes1.setText("Reportes");
+        mnReportes1.setText("Reporte por genero");
         mnReportes1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnReportes1ActionPerformed(evt);
@@ -139,7 +139,7 @@ public class PrincipalVisitante extends javax.swing.JFrame {
     }//GEN-LAST:event_mnReportesActionPerformed
 
     private void mnReportes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReportes1ActionPerformed
-        ReporteInstrumentos i = new ReporteInstrumentos(this, true);
+        ListadoInstrumentos i = new ListadoInstrumentos(this, true);
         i.setVisible(true);
     }//GEN-LAST:event_mnReportes1ActionPerformed
 

@@ -100,7 +100,7 @@ public class Helper {
         }
     }
 
-    public static void LlenadoTabla(JTable tabla, ArrayList<Alumno> alumno) {
+    public static void LlenadoTablaClase(JTable tabla, ArrayList<Alumno> alumno) {
         int nf;
         DefaultTableModel tm;
         tm = (DefaultTableModel) tabla.getModel();
@@ -110,11 +110,12 @@ public class Helper {
         for (int i = 0; i < nf; i++) {
             tm.setValueAt(i + 1, i, 0);
             tm.setValueAt(alumno.get(i).getIdentificacion(), i, 1);
-            tm.setValueAt(alumno.get(i).getClase(), i, 2);
+            tm.setValueAt(alumno.get(i).getNombre(), i, 2);
+            tm.setValueAt(alumno.get(i).getPrimer_apellido(), i, 3);
         }
     }
-    
-    public static void LlenadoTabla1(JTable tabla, ArrayList<Alumno> alumno) {
+
+    public static void LlenadoTablaInstrumento(JTable tabla, ArrayList<Alumno> alumno) {
         int nf;
         DefaultTableModel tm;
         tm = (DefaultTableModel) tabla.getModel();
@@ -124,11 +125,28 @@ public class Helper {
         for (int i = 0; i < nf; i++) {
             tm.setValueAt(i + 1, i, 0);
             tm.setValueAt(alumno.get(i).getIdentificacion(), i, 1);
-            tm.setValueAt(alumno.get(i).getSexo(), i, 2);
+            tm.setValueAt(alumno.get(i).getNombre(), i, 2);
+            tm.setValueAt(alumno.get(i).getPrimer_apellido(), i, 3);
         }
     }
-    
-       public static void LlenadoTabla2(JTable tabla, ArrayList<Alumno> alumno) {
+
+    public static void LlenadoTablaSexo(JTable tabla, ArrayList<Alumno> alumno) {
+        int nf;
+        DefaultTableModel tm;
+        tm = (DefaultTableModel) tabla.getModel();
+        nf = alumno.size();
+        tm.setRowCount(nf);
+        LimpiarTabla(tabla);
+        for (int i = 0; i < nf; i++) {
+            tm.setValueAt(i + 1, i, 0);
+            tm.setValueAt(alumno.get(i).getIdentificacion(), i, 1);
+            tm.setValueAt(alumno.get(i).getNombre(), i, 2);
+            tm.setValueAt(alumno.get(i).getPrimer_apellido(), i, 3);
+            tm.setValueAt(alumno.get(i).getSexo(), i, 4);
+        }
+    }
+
+    public static void LlenadoTabla2(JTable tabla, ArrayList<Alumno> alumno) {
         int nf;
         DefaultTableModel tm;
         tm = (DefaultTableModel) tabla.getModel();
@@ -268,7 +286,7 @@ public class Helper {
                 alumnosFiltrados.add(alumnos.get(i));
             }
         }
-        LlenadoTabla1(tabla, alumnosFiltrados);
+        LlenadoTablaSexo(tabla, alumnosFiltrados);
     }
 
     public static void ListadoAlumnoPorClase(JTable tabla, String ruta, String clase) {
@@ -279,14 +297,25 @@ public class Helper {
                 alumnosFiltrados.add(alumnos.get(i));
             }
         }
-        LlenadoTabla(tabla, alumnosFiltrados);
+        LlenadoTablaClase(tabla, alumnosFiltrados);
     }
-    
-       public static void ListadoAlumnoPorEdad(JTable tabla, String ruta, String edad) {
+
+    public static void ListadoAlumnoPorEdad(JTable tabla, String ruta, String edad) {
         ArrayList<Alumno> alumnos = TraerDatos(ruta);
         ArrayList<Alumno> alumnosFiltrados = new ArrayList();
         for (int i = 0; i < alumnos.size(); i++) {
             if (alumnos.get(i).getEdad().equals(edad)) {
+                alumnosFiltrados.add(alumnos.get(i));
+            }
+        }
+        LlenadoTabla2(tabla, alumnosFiltrados);
+    }
+
+    public static void ListadoAlumnoPorInstrumento(JTable tabla, String ruta, Instrumento instrumento) {
+        ArrayList<Alumno> alumnos = TraerDatos(ruta);
+        ArrayList<Alumno> alumnosFiltrados = new ArrayList();
+        for (int i = 0; i < alumnos.size(); i++) {
+            if (alumnos.get(i).getInstrumento().equals(instrumento)) {
                 alumnosFiltrados.add(alumnos.get(i));
             }
         }
@@ -380,6 +409,42 @@ public class Helper {
             a = instrumento.get(i);
             dcbm.addElement(a.getIdentificacion() + " - " + a.getNombre());
         }
+
+    }
+
+    public static boolean soloLetras(String texto) {
+        char[] numeros = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+        for (int i = 0; i < texto.length(); i++) {
+            char x = texto.charAt(i);
+            for (int j = 0; j < numeros.length; j++) {
+                if (x == numeros[j]) {
+                    return true;
+                }
+            }
+        }
+        return false;
+
+    }
+
+    public static boolean soloNumeros(String texto) {
+
+        char[] numeros = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+        for (int i = 0; i < texto.length(); i++) {
+            char x = texto.charAt(i);
+            boolean esta = false;
+            for (int j = 0; j < numeros.length; j++) {
+                if (x == numeros[j]) {
+                    esta = true;
+                    j = numeros.length + 1;
+
+                }
+            }
+
+            if (esta == false) {
+                return false;
+            }
+        }
+        return true;
 
     }
 

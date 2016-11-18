@@ -51,7 +51,7 @@ public class ListadoAlumnosPorClase extends javax.swing.JDialog {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmbListado.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        cmbListado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acordeon", "Folclor", "Caja - Vallenata", "Guitarra", "Guacharaca", "Timbal", "Conga", "Bateria", "Piano", "Bajo", "Canto", "Trompeta", "Saxofón" }));
+        cmbListado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Folclor", "Vallenato", "Salsa" }));
         jPanel2.add(cmbListado, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 160, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 220, 80));
@@ -79,11 +79,11 @@ public class ListadoAlumnosPorClase extends javax.swing.JDialog {
 
             },
             new String [] {
-                "No.", "Identificacion", "Clase"
+                "No.", "Identificacion", "Nombre", "Apellido"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -91,6 +91,7 @@ public class ListadoAlumnosPorClase extends javax.swing.JDialog {
             }
         });
         tblTabla.setToolTipText("");
+        tblTabla.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblTabla);
 
         jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 510, 200));

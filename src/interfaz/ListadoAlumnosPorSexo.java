@@ -79,11 +79,11 @@ public class ListadoAlumnosPorSexo extends javax.swing.JDialog {
 
             },
             new String [] {
-                "No.", "Nombre", "Sexo"
+                "No.", "Identificacion", "Nombre", "Apellido", "Sexo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -91,11 +91,12 @@ public class ListadoAlumnosPorSexo extends javax.swing.JDialog {
             }
         });
         tblTabla.setToolTipText("");
+        tblTabla.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblTabla);
 
-        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 410, 200));
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 450, 200));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 460, 250));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 480, 250));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Grupo Folclorico.jpeg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, -1));

@@ -298,6 +298,21 @@ public class AgregarAlumno extends javax.swing.JDialog {
             if (txtIdentificacion.getText().isEmpty() || txtEdad.getText().isEmpty() || txtNombre.getText().isEmpty() || txtPrimer_Apellido.getText().isEmpty() || txtSegundo_Apellido.getText().isEmpty()) {
                 Helper.mensaje(this, "No puede dejar campos vacios", "Error", 2);
                 txtNombre.requestFocusInWindow();
+            } else if (!Helper.soloNumeros(txtEdad.getText().trim())) {
+                Helper.mensaje(this, "Solo puede ingresar numeros", "Error", 2);
+                txtEdad.requestFocusInWindow();
+            } else if (!Helper.soloNumeros(txtIdentificacion.getText().trim())) {
+                Helper.mensaje(this, "Solo puede ingresar numeros", "Error", 2);
+                txtIdentificacion.requestFocusInWindow();
+            } else if (!Helper.soloLetras(txtNombre.getText().trim())) {
+                Helper.mensaje(this, "Solo puede ingresar letras", "Error", 2);
+                txtNombre.requestFocusInWindow();
+            } else if (!Helper.soloLetras(txtPrimer_Apellido.getText().trim())) {
+                Helper.mensaje(this, "Solo puede ingresar letras", "Error", 2);
+                txtPrimer_Apellido.requestFocusInWindow();
+            } else if (!Helper.soloLetras(txtSegundo_Apellido.getText().trim())) {
+                Helper.mensaje(this, "Solo puede ingresar letras", "Error", 2);
+                txtSegundo_Apellido.requestFocusInWindow();
             } else {
                 int indice;
 
@@ -483,6 +498,9 @@ public class AgregarAlumno extends javax.swing.JDialog {
         Instrumento i;
         if (txtIdentificacion.getText().trim().isEmpty()) {
             Helper.mensaje(this, "Por favor no dejar campos vacios", "Revisar campos", 2);
+            txtIdentificacion.requestFocusInWindow();
+        } else if (!Helper.soloNumeros(txtIdentificacion.getText().trim())) {
+            Helper.mensaje(this, "Solo puede ingresar numeros", "Error", 2);
             txtIdentificacion.requestFocusInWindow();
         } else {
             if (Helper.buscarPorIdentificacion(identificacion, rutaA)) {
